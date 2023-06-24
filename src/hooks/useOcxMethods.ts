@@ -24,8 +24,16 @@ const useOcxMethods = (ocx: any) => {
         ocx.GetVolume()
     }
 
+    const getMaxVolume = () => {
+        ocx.GetMaxVolume()
+    }
+
     const checkAvailableCall = () => {
         ocx.CheckAvailableCall()
+    }
+
+    const getAvailableCall = () => {
+        ocx.GetAvailableCall()
     }
 
     const setMicMute = (state: number) => {
@@ -36,20 +44,52 @@ const useOcxMethods = (ocx: any) => {
         ocx.SetVolume(volume)
     }
 
+    const setDnd = (state: number) => {
+        ocx.SetDnd(state)
+    }
+
     const getSavePath = () => {
         ocx.GetSavePath()
+    }
+
+    const getFileList = () => {
+        ocx.GetFileList()
+    }
+
+    const setUploadFile = (localFileName: string, serverFileName: string, serverUrl: string, fileSavePath: string) => {
+        ocx.SetUploadFile(localFileName, serverFileName, serverUrl, fileSavePath)
+    }
+
+    const setRecPartial = (nStartEnd: number, szFileName: string) => {
+        ocx.SetRecPartial(nStartEnd, szFileName)
+    }
+
+    const pauseRecording = () => {
+        ocx.PauseRecording()
+    }
+
+    const resumeRecording = () => {
+        ocx.ResumeRecording()
     }
 
     const setRecordFileName = (fileName: string) => {
         ocx.SetRecordFileName(fileName)
     }
 
-    const sendMessageExt = (numbers: any, content: any, parts: any) => {
-        ocx.SendMessageExt()
+    const sendMessageExt = (remoteNumbers: string, content: string, parts: string) => {
+        ocx.SendMessageExt(remoteNumbers, content, parts)
+    }
+
+    const getMessageCount = () => {
+        ocx.GetMessageCount()
     }
 
     const getBatteryInfo = () => {
         ocx.GetBatteryInfo()
+    }
+
+    const getBatteryState = () => {
+        ocx.GetBatteryState()
     }
 
     const setExtra = (values: string) => {
@@ -60,6 +100,10 @@ const useOcxMethods = (ocx: any) => {
         ocx.SetSelectDevice(device)
     }
 
+    const setUserInput = (state: number) => {
+        ocx.SetUserInput(state)
+    }
+
     return {
         createDevice,
         closeDevice,
@@ -67,15 +111,26 @@ const useOcxMethods = (ocx: any) => {
         setHookMode,
         getCallState,
         getVolume,
+        getMaxVolume,
         checkAvailableCall,
+        getAvailableCall,
         setMicMute,
         setVolume,
+        setDnd,
         getSavePath,
+        getFileList,
+        setUploadFile,
+        setRecPartial,
+        pauseRecording,
+        resumeRecording,
         setRecordFileName,
         sendMessageExt,
+        getMessageCount,
         getBatteryInfo,
+        getBatteryState,
         setExtra,
-        setSelectDevice
+        setSelectDevice,
+        setUserInput
     }
 }
 

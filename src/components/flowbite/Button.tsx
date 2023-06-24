@@ -17,22 +17,27 @@ interface ButtonProps {
     onClick?: () => any
 }
 
-const Button = ({ children, variant = 'primary', pill, onClick }: ButtonProps) => {
+const getStyles = (variant: string, pill?: boolean) => {
+    let color = ''
+
+    variant === 'primary' && (color = buttonPrimary)
+    variant === 'alternative' && (color = buttonAlternative)
+    variant === 'dark' && (color = buttonDark)
+    variant === 'light' && (color = buttonLight)
+    variant === 'green' && (color = buttonGreen)
+    variant === 'red' && (color = buttonRed)
+    variant === 'yellow' && (color = buttonYellow)
+    variant === 'purple' && (color = buttonPurple)
+
+    return color
+}
+
+const Button = ({ children, variant = 'primary', pill = false, onClick }: ButtonProps) => {
 
     return (
         <button
             onClick={onClick}
-            className={
-                variant === 'primary' ? buttonPrimary
-                    : variant === 'alternative' ? buttonAlternative
-                        : variant === 'dark' ? buttonDark
-                            : variant === 'light' ? buttonLight
-                                : variant === 'green' ? buttonGreen
-                                    : variant === 'red' ? buttonRed
-                                        : variant === 'yellow' ? buttonYellow
-                                            : variant === 'purple' ? buttonPurple
-                                                : ''
-            }
+            className={getStyles(variant)}
         >
             {children}
         </button>

@@ -105,6 +105,13 @@ const useOcxEvents = (ocx: any) => {
     }
 
     /**
+     * 최대 볼륨 확인.
+     */
+    ocx.DevMaxVolume = (volume: number) => {
+        console.log(`[DevMaxVolume] volume: ${volume}`)
+    }
+
+    /**
      * 배터리 정보.
      */
     ocx.DevBatteryInfo = (level: string) => {
@@ -158,6 +165,62 @@ const useOcxEvents = (ocx: any) => {
      */
     ocx.DevMessageExt = (szState: number, number: any, otherNumber: any, content: any, type: any, time: any, image: any) => {
         console.log(`[DevMessageExt] szState: ${szState}, otherNumber: ${otherNumber}, content: ${content}, type: ${type}, time: ${time}, image: ${image}`)
+    }
+
+    /**
+     * 녹취 파일 리스트.
+     */
+    ocx.DevFileList = (szFileList: string) => {
+        console.log(`[DevFileList] szFileList: ${szFileList}`)
+    }
+
+    /**
+     * 구간 녹취 시작, 종료.
+     */
+    ocx.DevRecPartial = (nStartEnd: any, szFileName: string, nResult: number) => {
+        console.log(`[DevRecPartial] nStartEnd: ${nStartEnd}, szFileName: ${szFileName}, nResult: ${nResult}`)
+    }
+
+    /**
+     * 녹취 일시중지.
+     */
+    ocx.DevPauseRecording = (szFileName: string, szCallInfo: string) => {
+        console.log(`[DevPauseRecording] szFileName: ${szFileName}, szCallInfo: ${szCallInfo}`)
+    }
+
+    /**
+     * 녹취 재개.
+     */
+    ocx.DevResumeRecording = (szFileName: string, szCallInfo: string) => {
+        console.log(`[DevResumeRecording] szFileName: ${szFileName}, szCallInfo: ${szCallInfo}`)
+    }
+
+    /**
+     * 배터리 충전 중 여부.
+     */
+    ocx.DevBatteryState = (state: number) => {
+        console.log(`[DevBatteryState] state: ${state}`)
+    }
+
+    /**
+     * 문자 발송 건수.
+     */
+    ocx.DevMessageCount = (
+        dayCount: number,
+        monthCount: number,
+        dayAutoCount: number,
+        monthAutoCount: number,
+        dayMaxCount: number,
+        monthMaxCount: number
+    ) => {
+        console.log(`[DevMessageCount] `)
+    }
+
+    /**
+     * DND 상태.
+     */
+    ocx.DevDnd = (code: number) => {
+        console.log(`[DevDnd] code: ${code}`)
     }
 
     return { ocx }
