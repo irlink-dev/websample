@@ -1,7 +1,7 @@
 import { primary, alternative, dark, light, green, red, yellow, purple } from '@/styles/colors'
 
 // mr-2 mb-2 ?
-export const button = 'focus:outline-none focus:ring-4 font-medium px-5 py-2.5 rounded-lg text-sm'
+export const button = 'focus:outline-none focus:ring-4 font-medium px-2 py-2 w-10 h-10 text-sm'
 
 export const buttonPrimary = `${button} ${primary}`
 

@@ -12,6 +12,7 @@ import {
 
 interface ButtonProps {
     children: React.ReactNode
+    className?: string
     variant?: 'primary' | 'alternative' | 'dark' | 'light' | 'green' | 'red' | 'yellow' | 'purple'
     pill?: boolean
     onClick?: () => any
@@ -29,15 +30,15 @@ const getStyles = (variant: string, pill?: boolean) => {
     variant === 'yellow' && (color = buttonYellow)
     variant === 'purple' && (color = buttonPurple)
 
-    return color
+    return `${color} ${pill ? 'rounded-full' : 'rounded-lg'} `
 }
 
-const Button = ({ children, variant = 'primary', pill = false, onClick }: ButtonProps) => {
+const Button = ({ children, className, variant = 'primary', pill = true, onClick }: ButtonProps) => {
 
     return (
         <button
             onClick={onClick}
-            className={getStyles(variant)}
+            className={getStyles(variant, pill) + className}
         >
             {children}
         </button>
