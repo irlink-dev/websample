@@ -33,12 +33,12 @@ const getStyles = (variant: string, pill?: boolean) => {
     return `${color} ${pill ? 'rounded-full' : 'rounded-lg'} `
 }
 
-const Button = ({ children, className, variant = 'primary', pill = true, onClick }: ButtonProps) => {
+const Button = ({ children, className, variant = 'primary', pill = false, onClick }: ButtonProps) => {
 
     return (
         <button
             onClick={onClick}
-            className={getStyles(variant, pill) + className}
+            className={`${className} ${getStyles(variant, pill)}`}
         >
             {children}
         </button>
