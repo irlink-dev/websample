@@ -1,8 +1,9 @@
-import * as process from 'process'
+'use client'
 
-const RootLayout = ({ children }: {
-    children: React.ReactNode
-}) => {
+import * as React from 'react'
+import { OcxStateProvider } from '@/components/context/OcxStateContext'
+
+const RootLayout = ({ children }: { children: React.ReactNode }) => {
     return (
         <html lang="en">
         <head>
@@ -12,7 +13,9 @@ const RootLayout = ({ children }: {
             <script src="/libs/IRWebSocketClient.js"></script>
             <script src="https://cdn.tailwindcss.com"></script>
         </head>
-        <body>{children}</body>
+        <OcxStateProvider>
+            <body>{children}</body>
+        </OcxStateProvider>
         </html>
     )
 }

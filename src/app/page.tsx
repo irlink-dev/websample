@@ -8,6 +8,7 @@ import RecordingPanel from '@/components/panels/RecordingPanel'
 import MessagePanel from '@/components/panels/MessagePanel'
 import UtilPanel from '@/components/panels/UtilPanel'
 import { Grid, Typography } from '@mui/material'
+import { OcxStateContext } from '@/components/context/OcxStateContext'
 
 declare global {
     interface Window {
@@ -19,9 +20,11 @@ const RootPage = () => {
 
     const [ocx, setOcx] = React.useState<any>(null)
 
+    const ocxStateContext = React.useContext(OcxStateContext)
+
     React.useEffect(() => {
-        const _ocx = new window.IRWebSocketClient()     // 객체 생성.
-        const { ocx } = useOcxEvents(_ocx)              // 이벤트 정의.
+        const _ocx = new window.IRWebSocketClient()             // 객체 생성.
+        const { ocx } = useOcxEvents(_ocx, ocxStateContext)     // 이벤트 정의.
         setOcx(() => ocx)
     }, [])
 

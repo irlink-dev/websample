@@ -1,10 +1,18 @@
-const useOcxEvents = (ocx: any) => {
+import { toCreateDeviceState } from '@/types/OcxState'
+
+const useOcxEvents = (ocx: any, ocxStateContext: any) => {
+
+    const {
+        setCreateDeviceState
+    } = ocxStateContext
 
     /**
      * 중계서버 연결, 연결 해제.
      */
     ocx.DevConnect = (nConnFlag: number) => {
-        console.log(`[DevConnect] nConnFlag: ${nConnFlag}`)
+        console.log(`[DevConnect] nConnFlag: ${nConnFlag} (${toCreateDeviceState(String(nConnFlag))})`)
+
+        setCreateDeviceState(() => nConnFlag)
     }
 
     /**
