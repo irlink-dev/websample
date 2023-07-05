@@ -8,12 +8,13 @@ interface InputProps {
     value?: any
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => any
     width?: number | string
+    disabled?: boolean
 }
 
 const LABEL_STYLE = 'block mb-2 text-sm font-medium text-gray-900 dark:text-white'
 const INPUT_STYLE = 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5'
 
-const Input = ({ label = '', id = label, placeholder, className, value, onChange, width }: InputProps) => {
+const Input = ({ label = '', id = label, placeholder, className, value, onChange, width, disabled }: InputProps) => {
     const _width = typeof width === 'number' ? String(width) : width
     return (
         <div>
@@ -28,6 +29,7 @@ const Input = ({ label = '', id = label, placeholder, className, value, onChange
                 placeholder={placeholder}
                 value={value}
                 onChange={onChange}
+                disabled={disabled}
             />
         </div>
     )
