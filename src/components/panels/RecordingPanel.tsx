@@ -31,8 +31,8 @@ const RecordingPanel = ({ ocx }: RecordingPanelProps) => {
     } = useOcxMethods(ocx)
 
     return (
-        <Paper sx={{ height: 260, p: 2 }}>
-            <h1>녹취 기능</h1>
+        <Paper sx={{ p: 2 }}>
+            <h3 className="font-semibold mb-4">녹취 패널</h3>
 
             {/* 녹취 서버 정보 */}
             <Button

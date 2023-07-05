@@ -15,8 +15,8 @@ const MessagePanel = ({ ocx }: MessagePanelProps) => {
     } = useOcxMethods(ocx)
 
     return (
-        <Paper sx={{ height: 260, p: 2 }}>
-            <h1>문자 기능</h1>
+        <Paper sx={{ p: 2 }}>
+            <h3 className="font-semibold mb-4">메시지 패널</h3>
 
             {/* 문자 발신 */}
             <Button

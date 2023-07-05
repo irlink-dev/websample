@@ -27,36 +27,21 @@ const RootPage = () => {
 
     return (
         <>
-            <Typography>법인폰 웹 샘플</Typography>
+            {/* 연결 패널 */}
+            <ConnectionPanel ocx={ocx} />
 
-            <Grid container spacing={3} sx={{ px: 5, pt: 1 }}>
+            {/* 콜 패널 */}
+            {/*<CallPanel ocx={ocx} />*/}
 
-                {/* 연결 패널 */}
-                <Grid item xs={12} md={6} lg={4}>
-                    <ConnectionPanel ocx={ocx} />
-                </Grid>
+            {/* 녹취 패널 */}
+            {/*<RecordingPanel ocx={ocx} />*/}
 
-                {/* 콜 패널 */}
-                <Grid item xs={12} md={6} lg={4}>
-                    <CallPanel ocx={ocx} />
-                </Grid>
+            {/* 문자 패널 */}
+            {/*<MessagePanel ocx={ocx} />*/}
 
-                {/* 녹취 패널 */}
-                <Grid item xs={12} md={6} lg={4}>
-                    <RecordingPanel ocx={ocx} />
-                </Grid>
+            {/* 유틸 패널 */}
+            {/*<UtilPanel ocx={ocx} />*/}
 
-                {/* 문자 패널 */}
-                <Grid item xs={12} md={6} lg={4}>
-                    <MessagePanel ocx={ocx} />
-                </Grid>
-
-                {/* 유틸 패널 */}
-                <Grid item xs={12} md={6} lg={4}>
-                    <UtilPanel ocx={ocx} />
-                </Grid>
-
-            </Grid>
         </>
     )
 }

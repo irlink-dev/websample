@@ -13,6 +13,7 @@ import {
     VolumeUp
 } from '@mui/icons-material'
 import { Paper } from '@mui/material'
+import Input from '@/components/flowbite/Input'
 
 interface CallPanelProps {
     ocx: any
@@ -32,33 +33,39 @@ const CallPanel = ({ ocx }: CallPanelProps) => {
     } = useOcxMethods(ocx)
 
     return (
-        <Paper sx={{ height: 260, p: 2 }}>
-            <h1>전화 기능</h1>
+        <Paper sx={{ p: 2 }}>
+            <h3 className="font-semibold mb-4">콜 패널</h3>
 
-            {/* 전화 걸기 */}
-            <Button
-                variant="green"
-                onClick={() => setDialStr('01052844463')}
-            >
-                <Call />
-            </Button>
+            <div className="flex">
+                <Input
+                    placeholder="고객 전화번호" />
 
-            {/* 전화 끊기 */}
-            <Button
-                variant="red"
-                onClick={() => setHookMode(1)}
-            >
-                <CallEnd />
-            </Button>
+                {/* 전화 걸기 */}
+                <Button
+                    variant="green"
+                    onClick={() => setDialStr('01052844463')}
+                >
+                    <Call />
+                </Button>
 
-            {/* 전화 받기 */}
-            <Button
-                variant="green"
-                onClick={() => setHookMode(3)}
-            >
-                <PhoneCallback />
-                {/*<PhoneInTalk />*/}
-            </Button>
+                {/* 전화 끊기 */}
+                <Button
+                    variant="red"
+                    onClick={() => setHookMode(1)}
+                >
+                    <CallEnd />
+                </Button>
+
+                {/* 전화 받기 */}
+                <Button
+                    variant="green"
+                    onClick={() => setHookMode(3)}
+                >
+                    <PhoneCallback />
+                    {/*<PhoneInTalk />*/}
+                </Button>
+            </div>
+
 
             <h1>통화 기능</h1>
 

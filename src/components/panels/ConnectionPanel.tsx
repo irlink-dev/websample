@@ -1,12 +1,18 @@
 import * as React from 'react'
 import useOcxMethods from '@/hooks/useOcxMethods'
+import useLocalStorage from '@/hooks/useLocalStorage'
 import Button from '@/components/flowbite/Button'
 import Input from '@/components/flowbite/Input'
-import { MobileOff, PhoneAndroid, PhonelinkErase, PhonelinkLock } from '@mui/icons-material'
-import { Paper, Typography } from '@mui/material'
+
+const LOCAL_STORAGE_VALUES_KEY = `irwebsample:values`
 
 interface ConnectionPanelProps {
     ocx: any
+}
+
+interface ConnectionPanelData {
+    serverUrl: string
+    phoneNumber: string
 }
 
 const ConnectionPanel = ({ ocx }: ConnectionPanelProps) => {
@@ -17,79 +23,100 @@ const ConnectionPanel = ({ ocx }: ConnectionPanelProps) => {
         setUserInput
     } = useOcxMethods(ocx)
 
-    const [serverUrl, setServerUrl] = React.useState('https://192.168.1.175:3001/')
-    const [phoneNumber, setPhoneNumber] = React.useState('01028746064')
+    const {
+        getLocalStorageData,
+        setLocalStorageData
+    } = useLocalStorage()
+
+    const [data, setData] = React.useState<ConnectionPanelData>(() => {
+        const storageData = getLocalStorageData(LOCAL_STORAGE_VALUES_KEY)
+        return storageData ? storageData : {
+            serverUrl: 'https://192.168.1.175:3001/',
+            phoneNumber: '01028746064'
+        }
+    })
+
+    const { serverUrl, phoneNumber } = data
+
+    React.useEffect(() => {
+        setLocalStorageData(LOCAL_STORAGE_VALUES_KEY, data)
+    }, [data])
 
     const handlePhoneNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setPhoneNumber(() => event.target.value)
+        setData({
+            ...data,
+            phoneNumber: event.target.value
+        })
     }
 
     const handleServerUrlChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setServerUrl(() => event.target.value)
+        setData({
+            ...data,
+            serverUrl: event.target.value
+        })
     }
 
     return (
-        <Paper sx={{ height: 260, p: 2 }}>
-
-            <Typography>법인폰 제어 (연결 기능)</Typography>
-
-            <Input
-                className="mt-4 mb-2"
-                placeholder="서버 URL"
-                value={serverUrl}
-                onChange={(event) => handleServerUrlChange(event)} />
-
-            <div className="flex w-full gap-2">
-
-                {/* 법인폰 번호 입력 */}
-                <Input
-                    className="mb-2"
-                    placeholder="법인폰 번호"
-                    value={phoneNumber}
-                    onChange={(event) => handlePhoneNumberChange(event)} />
-
-                <div className="">
-
-                    {/* 법인폰 연결 */}
+        <div className="w-full bg-[#fafafa]">
+            <div className="max-w-screen-lg mx-auto h-[60px] flex items-center justify-between">
+                <div className="flex gap-2">
+                    <h1 className="text-lg font-medium text-[#333333]">IRLINK WEB SAMPLE</h1>
+                    <span className="text-xs text-[#777777]">Socket.io Client v2</span>
+                </div>
+                <div className="flex gap-2">
+                    <Input
+                        className="bg-white"
+                        width={52}
+                        placeholder="서버 URL"
+                        value={serverUrl}
+                        onChange={(event) => handleServerUrlChange(event)}
+                    />
+                    <Input
+                        className="bg-white"
+                        placeholder="법인폰 번호"
+                        value={phoneNumber}
+                        onChange={(event) => handlePhoneNumberChange(event)}
+                    />
                     <Button
                         variant="primary"
-                        className="mr-1"
+                        className="py-2"
                         onClick={() => createDevice(serverUrl, phoneNumber)}
                     >
-                        <PhoneAndroid />
+                        연결
                     </Button>
-
-                    {/* 법인폰 연결 해제 */}
                     <Button
                         variant="alternative"
+                        className="py-2"
                         onClick={() => closeDevice()}
                     >
-                        <MobileOff />
+                        연결 해제
                     </Button>
                 </div>
             </div>
 
-            <div className="">
+            {/*<div className="flex mt-2 items-center">*/}
 
-                {/* 사용자 입력 차단 */}
-                <Button
-                    variant="primary"
-                    className="mr-1"
-                    onClick={() => setUserInput(0)}
-                >
-                    <PhonelinkLock />
-                </Button>
+            {/*    <Typography sx={{ mr: 1 }}>사용자 입력 차단</Typography>*/}
 
-                {/* 사용자 입력 차단 해제 */}
-                <Button
-                    variant="alternative"
-                    onClick={() => setUserInput(1)}
-                >
-                    <PhonelinkErase />
-                </Button>
-            </div>
+            {/*    /!* 사용자 입력 차단 *!/*/}
+            {/*    <Button*/}
+            {/*        variant="primary"*/}
+            {/*        className="mr-1"*/}
+            {/*        onClick={() => setUserInput(0)}*/}
+            {/*    >*/}
+            {/*        <PhonelinkLock />*/}
+            {/*    </Button>*/}
 
-        </Paper>
+            {/*    /!* 사용자 입력 차단 해제 *!/*/}
+            {/*    <Button*/}
+            {/*        variant="alternative"*/}
+            {/*        onClick={() => setUserInput(1)}*/}
+            {/*    >*/}
+            {/*        <PhonelinkErase />*/}
+            {/*    </Button>*/}
+            {/*</div>*/}
+
+        </div>
     )
 }
 

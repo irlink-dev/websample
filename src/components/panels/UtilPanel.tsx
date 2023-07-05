@@ -17,8 +17,8 @@ const UtilPanel = ({ ocx }: UtilPanelProps) => {
     } = useOcxMethods(ocx)
 
     return (
-        <Paper sx={{ height: 260, p: 2 }}>
-            <h1>기타 제어</h1>
+        <Paper sx={{ p: 2 }}>
+            <h3 className="font-semibold mb-4">유틸 패널</h3>
 
             {/* 배터리 정보 */}
             <Button

@@ -12,7 +12,7 @@ const RootLayout = ({ children }: {
             <script src="/libs/IRWebSocketClient.js"></script>
             <script src="https://cdn.tailwindcss.com"></script>
         </head>
-        <body className="bg-[#fafafa]">{children}</body>
+        <body>{children}</body>
         </html>
     )
 }
