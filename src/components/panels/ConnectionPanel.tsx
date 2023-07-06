@@ -7,7 +7,7 @@ import { OcxStateContext } from '@/components/context/OcxStateContext'
 import { CreateDeviceState } from '@/types/OcxState'
 import { PhonelinkErase, PhonelinkLock } from '@mui/icons-material'
 
-const LOCAL_STORAGE_VALUES_KEY = `irwebsample:values`
+const LOCAL_STORAGE_VALUES_KEY = `ir_web_sample:connection_panel:values`
 
 interface ConnectionPanelProps {
     ocx: any
@@ -88,7 +88,7 @@ const ConnectionPanel = ({ ocx }: ConnectionPanelProps) => {
                         <>
                             {/* Screen Block Enable */}
                             <Button
-                                variant="alternative"
+                                variant="light"
                                 className=""
                                 onClick={() => setUserInput(0)}
                             >
