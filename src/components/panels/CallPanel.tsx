@@ -1,5 +1,8 @@
+import * as React from 'react'
 import useOcxMethods from '@/hooks/useOcxMethods'
+import useLocalStorage from '@/hooks/useLocalStorage'
 import Button from '@/components/flowbite/Button'
+import Input from '@/components/flowbite/Input'
 import {
     Call,
     CallEnd,
@@ -12,14 +15,25 @@ import {
     VolumeDown,
     VolumeUp
 } from '@mui/icons-material'
-import { Paper } from '@mui/material'
-import Input from '@/components/flowbite/Input'
+import Card from '@/components/flowbite/Card'
+import { MuteState } from '@/types/OcxState'
+import { OcxStateContext } from '@/components/context/OcxStateContext'
+
+const LOCAL_STORAGE_VALUES_KEY = `ir_web_sample:call_panel:values`
 
 interface CallPanelProps {
     ocx: any
 }
 
+interface CallPanelData {
+    phoneNumber: string
+}
+
 const CallPanel = ({ ocx }: CallPanelProps) => {
+
+    const {
+        muteState
+    } = React.useContext(OcxStateContext)
 
     const {
         setDialStr,
@@ -32,44 +46,92 @@ const CallPanel = ({ ocx }: CallPanelProps) => {
         setDnd
     } = useOcxMethods(ocx)
 
+    const {
+        getLocalStorageData,
+        setLocalStorageData
+    } = useLocalStorage()
+
+    const [data, setData] = React.useState<CallPanelData>(() => {
+        const storageData = getLocalStorageData(LOCAL_STORAGE_VALUES_KEY)
+        return storageData ? storageData : {
+            phoneNumber: ''
+        }
+    })
+
+    const { phoneNumber } = data
+
+    React.useEffect(() => {
+        setLocalStorageData(LOCAL_STORAGE_VALUES_KEY, data)
+    }, [data])
+
+    const handlePhoneNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setData({
+            ...data,
+            phoneNumber: event.target.value
+        })
+    }
+
     return (
-        <Paper sx={{ p: 2 }}>
-            <h3 className="font-semibold mb-4">콜 패널</h3>
+        <>
+            <Card className="flex gap-2 w-full mb-5">
 
-            <div className="flex">
+                {/* Mute & Unmute */}
+                {String(muteState) === MuteState.MIC_ON ? (
+                    <Button
+                        variant="light"
+                        className="w-12"
+                        onClick={() => setMicMute(Number(MuteState.MIC_OFF))}
+                    >
+                        <Mic sx={{ color: '#777777' }} />
+                    </Button>
+                ) : (
+                    <Button
+                        variant="dark"
+                        className="w-12"
+                        onClick={() => setMicMute(Number(MuteState.MIC_ON))}
+                    >
+                        <MicOff />
+                    </Button>
+                )}
+
+                {/* Customer Phone Number Input Field */}
                 <Input
-                    placeholder="고객 전화번호" />
+                    placeholder="고객 전화번호"
+                    value={phoneNumber}
+                    onChange={(event) => handlePhoneNumberChange(event)}
+                />
 
-                {/* 전화 걸기 */}
+                {/* Start Outbound Call */}
                 <Button
                     variant="green"
-                    onClick={() => setDialStr('01052844463')}
+                    onClick={() => setDialStr(phoneNumber)}
                 >
-                    <Call />
+                    <Call sx={{ width: '20px', height: '20px' }} />{' '}
+                    전화 걸기
                 </Button>
 
-                {/* 전화 끊기 */}
-                <Button
-                    variant="red"
-                    onClick={() => setHookMode(1)}
-                >
-                    <CallEnd />
-                </Button>
-
-                {/* 전화 받기 */}
+                {/* Start Inbound Call */}
                 <Button
                     variant="green"
                     onClick={() => setHookMode(3)}
                 >
-                    <PhoneCallback />
+                    <PhoneCallback sx={{ width: '20px', height: '20px' }} />{' '}
+                    전화 받기
                     {/*<PhoneInTalk />*/}
                 </Button>
-            </div>
 
+                {/* Disconnect Call */}
+                <Button
+                    variant="red"
+                    onClick={() => setHookMode(1)}
+                >
+                    <CallEnd sx={{ width: '20px', height: '20px' }} />{' '}
+                    전화 끊기
+                </Button>
 
-            <h1>통화 기능</h1>
+            </Card>
 
-            {/* 통화 상태 확인 */}
+            {/* Get Call State */}
             <Button
                 variant="alternative"
                 onClick={() => getCallState()}
@@ -77,7 +139,7 @@ const CallPanel = ({ ocx }: CallPanelProps) => {
                 통화 상태 확인
             </Button>
 
-            {/* 통화 볼륨 확인 */}
+            {/* Get Volume */}
             <Button
                 variant="alternative"
                 onClick={() => getVolume()}
@@ -85,7 +147,7 @@ const CallPanel = ({ ocx }: CallPanelProps) => {
                 통화 볼륨 확인
             </Button>
 
-            {/* 최대 통화 볼륨 확인 */}
+            {/* Get Max Volume */}
             <Button
                 variant="alternative"
                 onClick={() => getMaxVolume()}
@@ -93,23 +155,7 @@ const CallPanel = ({ ocx }: CallPanelProps) => {
                 최대 통화 볼륨 확인
             </Button>
 
-            {/* 음소거 */}
-            <Button
-                variant="alternative"
-                onClick={() => setMicMute(1)}
-            >
-                <MicOff />
-            </Button>
-
-            {/* 음소거 해제 */}
-            <Button
-                variant="alternative"
-                onClick={() => setMicMute(0)}
-            >
-                <Mic />
-            </Button>
-
-            {/* 통화 볼륨 설정 */}
+            {/* Set Volume */}
             <Button
                 variant="alternative"
                 onClick={() => setVolume(1)}
@@ -118,7 +164,7 @@ const CallPanel = ({ ocx }: CallPanelProps) => {
                 {/*<VolumeDown />*/}
             </Button>
 
-            {/* 통화 가능 여부 확인 */}
+            {/* Check Call Availability */}
             <Button
                 variant="alternative"
                 // onClick={() => checkAvailableCall()}
@@ -127,22 +173,25 @@ const CallPanel = ({ ocx }: CallPanelProps) => {
                 통화 가능 여부 확인
             </Button>
 
-            {/* 착신 금지 */}
+            {/* Set DND */}
             <Button
                 variant="alternative"
                 onClick={() => setDnd(1)}
             >
-                <PhoneDisabled />
+                <PhoneDisabled sx={{ width: '20px', height: '20px' }} />{' '}
+                착신 금지
             </Button>
 
-            {/* 착신 금지 해제 */}
+            {/* Disable DND */}
             <Button
                 variant="alternative"
                 onClick={() => setDnd(0)}
             >
-                <PhoneEnabled />
+                <PhoneEnabled sx={{ width: '20px', height: '20px' }} />{' '}
+                착신 금지 해제
             </Button>
-        </Paper>
+
+        </>
     )
 }
 
