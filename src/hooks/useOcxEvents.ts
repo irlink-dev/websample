@@ -1,9 +1,10 @@
-import { toCreateDeviceState } from '@/types/OcxState'
+import { toCreateDeviceState, toMuteState } from '@/types/OcxState'
 
 const useOcxEvents = (ocx: any, ocxStateContext: any) => {
 
     const {
-        setCreateDeviceState
+        setCreateDeviceState,
+        setMuteState
     } = ocxStateContext
 
     /**
@@ -151,7 +152,9 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
      * 마이크 음소거.
      */
     ocx.DevMute = (szState: number) => {
-        console.log(`[DevMute] szState: ${szState}`)
+        console.log(`[DevMute] szState: ${szState} (${toMuteState(String(szState))})`)
+
+        setMuteState(() => szState)
     }
 
     /**
