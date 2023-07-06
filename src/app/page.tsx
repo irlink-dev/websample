@@ -27,54 +27,82 @@ const RootPage = () => {
         setOcx(() => ocx)
     }, [])
 
+    const CALL_PANEL = 1
+    const RECORDING_PANEL = 2
+    const MESSAGE_PANEL = 3
+    const UTIL_PANEL = 4
+
+    const [tab, setTab] = React.useState<number>(CALL_PANEL)
+
     const TAB = 'inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50'
     const TAB_SELECTED = 'inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg'
 
     return (
         <>
+            {/* TOP BAR - CONNECTION PANEL */}
             <ConnectionPanel ocx={ocx} />
 
             <div className="max-w-screen-lg mx-auto mt-5">
 
                 <div className="mb-4 border-b border-gray-200 dark:border-gray-700">
+
+                    {/* TAB SELECT LIST */}
                     <ul className="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200">
+
                         <li className="mr-2">
-                            <button className={TAB_SELECTED}>
+                            <button
+                                className={tab === CALL_PANEL ? TAB_SELECTED : TAB}
+                                onClick={() => setTab(() => CALL_PANEL)}
+                            >
                                 Call Panel
                             </button>
                         </li>
+
                         <li className="mr-2">
-                            <button className={TAB}>
+                            <button
+                                className={tab === RECORDING_PANEL ? TAB_SELECTED : TAB}
+                                onClick={() => setTab(() => RECORDING_PANEL)}
+                            >
                                 Recording Panel
                             </button>
                         </li>
+
                         <li className="mr-2">
-                            <button className={TAB}>
+                            <button
+                                className={tab === MESSAGE_PANEL ? TAB_SELECTED : TAB}
+                                onClick={() => setTab(() => MESSAGE_PANEL)}
+                            >
                                 Message Panel
                             </button>
                         </li>
+
                         <li>
-                            <button className={TAB}>
+                            <button
+                                className={tab === UTIL_PANEL ? TAB_SELECTED : TAB}
+                                onClick={() => setTab(() => UTIL_PANEL)}
+                            >
                                 Util Panel
                             </button>
                         </li>
+
                     </ul>
+
                 </div>
 
-                <div>
-                    <div className="hidden">
-                        <CallPanel ocx={ocx} />
-                    </div>
-                    <div className="hidden">
-                        <RecordingPanel ocx={ocx} />
-                    </div>
-                    <div className="hidden">
-                        <MessagePanel ocx={ocx} />
-                    </div>
-                    <div className="hidden">
-                        <UtilPanel ocx={ocx} />
-                    </div>
-                </div>
+                {/* TAB CONTENTS */}
+                {tab === CALL_PANEL && (
+                    <CallPanel ocx={ocx} />
+                )}
+                {tab === RECORDING_PANEL && (
+                    <RecordingPanel ocx={ocx} />
+                )}
+                {tab === MESSAGE_PANEL && (
+                    <MessagePanel ocx={ocx} />
+                )}
+                {tab === UTIL_PANEL && (
+                    <UtilPanel ocx={ocx} />
+                )}
+
             </div>
         </>
     )
