@@ -3,6 +3,9 @@ import useOcxMethods from '@/hooks/useOcxMethods'
 import useLocalStorage from '@/hooks/useLocalStorage'
 import Button from '@/components/flowbite/Button'
 import Input from '@/components/flowbite/Input'
+import Card from '@/components/flowbite/Card'
+import { DndState, MuteState } from '@/types/OcxState'
+import { OcxStateContext } from '@/components/context/OcxStateContext'
 import {
     Call,
     CallEnd,
@@ -15,9 +18,6 @@ import {
     VolumeDown,
     VolumeUp
 } from '@mui/icons-material'
-import Card from '@/components/flowbite/Card'
-import { MuteState } from '@/types/OcxState'
-import { OcxStateContext } from '@/components/context/OcxStateContext'
 
 const LOCAL_STORAGE_VALUES_KEY = `ir_web_sample:call_panel:values`
 
@@ -32,7 +32,8 @@ interface CallPanelData {
 const CallPanel = ({ ocx }: CallPanelProps) => {
 
     const {
-        muteState
+        muteState,
+        dndState
     } = React.useContext(OcxStateContext)
 
     const {
@@ -74,6 +75,25 @@ const CallPanel = ({ ocx }: CallPanelProps) => {
     return (
         <>
             <Card className="flex gap-2 w-full mb-5">
+
+                {/* DND Enable & Disable */}
+                {String(dndState) === DndState.DND_ON ? (
+                    <Button
+                        variant="dark"
+                        className="w-12"
+                        onClick={() => setDnd(0)}
+                    >
+                        <PhoneDisabled sx={{ width: '20px', height: '20px' }} />{' '}
+                    </Button>
+                ) : (
+                    <Button
+                        variant="light"
+                        className="w-12"
+                        onClick={() => setDnd(1)}
+                    >
+                        <PhoneEnabled sx={{ width: '20px', height: '20px', color: '#777777' }} />{' '}
+                    </Button>
+                )}
 
                 {/* Mute & Unmute */}
                 {String(muteState) === MuteState.MIC_ON ? (
@@ -171,24 +191,6 @@ const CallPanel = ({ ocx }: CallPanelProps) => {
                 // onClick={() => getAvailableCall()}
             >
                 통화 가능 여부 확인
-            </Button>
-
-            {/* Set DND */}
-            <Button
-                variant="alternative"
-                onClick={() => setDnd(1)}
-            >
-                <PhoneDisabled sx={{ width: '20px', height: '20px' }} />{' '}
-                착신 금지
-            </Button>
-
-            {/* Disable DND */}
-            <Button
-                variant="alternative"
-                onClick={() => setDnd(0)}
-            >
-                <PhoneEnabled sx={{ width: '20px', height: '20px' }} />{' '}
-                착신 금지 해제
             </Button>
 
         </>

@@ -15,7 +15,6 @@ const useLocalStorage = () => {
         localStorage?.setItem(key, JSON.stringify(data))
     }
 
-
     return {
         getLocalStorageData,
         setLocalStorageData

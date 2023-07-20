@@ -1,5 +1,12 @@
 import * as React from 'react'
-import { CreateDeviceState, CreateDeviceStateType, MuteState, MuteStateType } from '@/types/OcxState'
+import {
+    CreateDeviceState,
+    CreateDeviceStateType,
+    DndState,
+    DndStateType,
+    MuteState,
+    MuteStateType
+} from '@/types/OcxState'
 
 export const OcxStateContext = React.createContext({
 
@@ -17,22 +24,26 @@ export const OcxStateContext = React.createContext({
     muteState: MuteState.MIC_ON,
     setMuteState: ((state: MuteStateType) => {
         /* empty */
-    }) as React.Dispatch<React.SetStateAction<MuteStateType>>
+    }) as React.Dispatch<React.SetStateAction<MuteStateType>>,
+
+    /**
+     * 착신 거부 상태.
+     */
+    dndState: DndState.DND_OFF,
+    setDndState: ((state: DndStateType) => {
+        /* empty */
+    }) as React.Dispatch<React.SetStateAction<DndStateType>>
 
 })
 
 export const OcxStateProvider = ({ children }: { children: React.ReactNode }) => {
 
-    /**
-     * 디바이스 연결 상태.
-     */
-    const [createDeviceState, setCreateDeviceState] = React.useState<CreateDeviceStateType>(CreateDeviceState.DISCONNECTED)
+    const [createDeviceState, setCreateDeviceState] =
+        React.useState<CreateDeviceStateType>(CreateDeviceState.DISCONNECTED)
 
-    /**
-     * 음소거 상태.
-     */
     const [muteState, setMuteState] = React.useState<MuteStateType>(MuteState.MIC_ON)
 
+    const [dndState, setDndState] = React.useState<DndStateType>(DndState.DND_OFF)
 
     return (
         <OcxStateContext.Provider
@@ -40,7 +51,9 @@ export const OcxStateProvider = ({ children }: { children: React.ReactNode }) =>
                 createDeviceState,
                 setCreateDeviceState,
                 muteState,
-                setMuteState
+                setMuteState,
+                dndState,
+                setDndState
             }}
         >
             {children}

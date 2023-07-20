@@ -1,10 +1,11 @@
-import { toCreateDeviceState, toMuteState } from '@/types/OcxState'
+import { MuteState, toCreateDeviceState, toDndState, toMuteState } from '@/types/OcxState'
 
 const useOcxEvents = (ocx: any, ocxStateContext: any) => {
 
     const {
         setCreateDeviceState,
-        setMuteState
+        setMuteState,
+        setDndState
     } = ocxStateContext
 
     /**
@@ -59,6 +60,7 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
 
         if (nFlag === 1) {
             console.log(`[DevRecStartEnd] 녹취 시작.`)
+            setMuteState(() => MuteState.MIC_ON)
         } else {
             console.log(`[DevRecStartEnd] 녹취 종료.`)
         }
@@ -231,7 +233,9 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
      * DND 상태.
      */
     ocx.DevDnd = (code: number) => {
-        console.log(`[DevDnd] code: ${code}`)
+        console.log(`[DevDnd] code: ${code} (${toDndState(String(code))})`)
+
+        setDndState(() => code)
     }
 
     return { ocx }
