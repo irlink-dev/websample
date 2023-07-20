@@ -72,13 +72,18 @@ export const toStateKey = (
 
 export const toCreateDeviceState = (state: string) => toStateKey(CreateDeviceState, state)
 export type CreateDeviceStateType = typeof CreateDeviceState[keyof typeof CreateDeviceState]
+
 export const toCallState = (state: string) => toStateKey(CallState, state)
 export type CallStateType = typeof CallState[keyof typeof CallState]
+
 export const toCallActiveState = (state: string) => toStateKey(CallActiveState, state)
 export type CallActiveStateType = typeof CallActiveState[keyof typeof CallActiveState]
+
 export const toBellState = (state: string) => toStateKey(BellState, state)
 export type BellStateType = typeof BellState[keyof typeof BellState]
+
 export const toMuteState = (state: string) => toStateKey(MuteState, state)
 export type MuteStateType = typeof MuteState[keyof typeof MuteState]
+
 export const toDndState = (state: string) => toStateKey(DndState, state)
 export type DndStateType = typeof DndState[keyof typeof DndState]
