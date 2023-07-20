@@ -4,7 +4,7 @@ import useLocalStorage from '@/hooks/useLocalStorage'
 import Button from '@/components/flowbite/Button'
 import Input from '@/components/flowbite/Input'
 import Card from '@/components/flowbite/Card'
-import { DndState, MuteState } from '@/types/OcxState'
+import { BellState, CallState, DndState, MuteState } from '@/types/OcxState'
 import { OcxStateContext } from '@/components/context/OcxStateContext'
 import {
     Call,
@@ -32,6 +32,8 @@ interface CallPanelData {
 const CallPanel = ({ ocx }: CallPanelProps) => {
 
     const {
+        callState,
+        bellState,
         muteState,
         dndState
     } = React.useContext(OcxStateContext)
@@ -121,43 +123,64 @@ const CallPanel = ({ ocx }: CallPanelProps) => {
                     onChange={(event) => handlePhoneNumberChange(event)}
                 />
 
-                {/* Start Outbound Call */}
-                <Button
-                    variant="green"
-                    onClick={() => setDialStr(phoneNumber)}
+                {/* Hook Off */}
+                <div
+                    className={
+                        String(callState) === CallState.CONNECTED ||
+                        String(callState) === CallState.OUTBOUND ? 'hidden' : ''
+                    }
                 >
-                    <Call sx={{ width: '20px', height: '20px' }} />{' '}
-                    전화 걸기
-                </Button>
+                    {String(bellState) === BellState.RINGING ? (
+                        <Button
+                            variant="green"
+                            onClick={() => setHookMode(3)}
+                        >
+                            <PhoneCallback sx={{ width: '20px', height: '20px' }} />{' '}
+                            전화 받기
+                        </Button>
+                    ) : (
+                        <Button
+                            variant="green"
+                            onClick={() => setDialStr(phoneNumber)}
+                        >
+                            <Call sx={{ width: '20px', height: '20px' }} />{' '}
+                            전화 걸기
+                        </Button>
+                    )}
+                </div>
 
-                {/* Start Inbound Call */}
-                <Button
-                    variant="green"
-                    onClick={() => setHookMode(3)}
-                >
-                    <PhoneCallback sx={{ width: '20px', height: '20px' }} />{' '}
-                    전화 받기
-                    {/*<PhoneInTalk />*/}
-                </Button>
+                {/* Hook On */}
+                <div className={String(callState) === CallState.IDLE ? 'hidden' : ''}>
+                    {String(bellState) === BellState.RINGING ? (
+                        <Button
+                            variant="red"
+                            onClick={() => setHookMode(1)}
+                        >
+                            <CallEnd sx={{ width: '20px', height: '20px' }} />{' '}
+                            전화 거절
+                        </Button>
+                    ) : (
+                        <Button
+                            variant="red"
+                            onClick={() => setHookMode(1)}
+                        >
+                            <CallEnd sx={{ width: '20px', height: '20px' }} />{' '}
+                            전화 끊기
+                        </Button>
+                    )}
+                </div>
 
-                {/* Disconnect Call */}
+                {/* Get Call Active Status */}
                 <Button
-                    variant="red"
-                    onClick={() => setHookMode(1)}
+                    variant="alternative"
+                    onClick={() => getCallState()}
                 >
-                    <CallEnd sx={{ width: '20px', height: '20px' }} />{' '}
-                    전화 끊기
+                    활성 상태 확인
                 </Button>
 
             </Card>
 
-            {/* Get Call State */}
-            <Button
-                variant="alternative"
-                onClick={() => getCallState()}
-            >
-                통화 상태 확인
-            </Button>
+
 
             {/* Get Volume */}
             <Button
