@@ -1,5 +1,5 @@
 /**
- * 디바이스 연결 상태. [IR-WIRELESS]
+ * 디바이스 연결 상태.
  */
 export const CreateDeviceState = {
     DISCONNECTED: '0',
@@ -8,7 +8,35 @@ export const CreateDeviceState = {
     REJECT: '-1',
     DUPLICATE_LOGIN: '-2',
     DISCONNECTED_PAIRING: '-3',
-    DUPLICATE_WEB_LOGIN: '-4'
+    DUPLICATE_WEB_LOGIN: '-4',
+    ZMS_UNREGISTERED_USE: '-5',
+    ZIBOX_DISCONNECTED: '-6'
+}
+
+/**
+ * 벨 상태.
+ */
+export const BellState = {
+    SILENT: '0',
+    RINGING: '1'
+}
+
+/**
+ * 콜 상태.
+ */
+export const CallState = {
+    IDLE: '0',
+    INBOUND: '1',
+    OUTBOUND: '2',
+    CONNECTED: '3'
+}
+
+/**
+ * 콜 활성화 상태.
+ */
+export const CallActiveState = {
+    INACTIVE: '0',
+    ACTIVE: '1'
 }
 
 /**
@@ -44,6 +72,12 @@ export const toStateKey = (
 
 export const toCreateDeviceState = (state: string) => toStateKey(CreateDeviceState, state)
 export type CreateDeviceStateType = typeof CreateDeviceState[keyof typeof CreateDeviceState]
+export const toCallState = (state: string) => toStateKey(CallState, state)
+export type CallStateType = typeof CallState[keyof typeof CallState]
+export const toCallActiveState = (state: string) => toStateKey(CallActiveState, state)
+export type CallActiveStateType = typeof CallActiveState[keyof typeof CallActiveState]
+export const toBellState = (state: string) => toStateKey(BellState, state)
+export type BellStateType = typeof BellState[keyof typeof BellState]
 export const toMuteState = (state: string) => toStateKey(MuteState, state)
 export type MuteStateType = typeof MuteState[keyof typeof MuteState]
 export const toDndState = (state: string) => toStateKey(DndState, state)

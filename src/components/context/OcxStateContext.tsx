@@ -1,5 +1,11 @@
 import * as React from 'react'
 import {
+    BellState,
+    BellStateType,
+    CallActiveState,
+    CallActiveStateType,
+    CallState,
+    CallStateType,
     CreateDeviceState,
     CreateDeviceStateType,
     DndState,
@@ -17,6 +23,30 @@ export const OcxStateContext = React.createContext({
     setCreateDeviceState: ((state: CreateDeviceStateType) => {
         /* empty */
     }) as React.Dispatch<React.SetStateAction<CreateDeviceStateType>>,
+
+    /**
+     * 콜 상태.
+     */
+    callState: CallState.IDLE,
+    setCallState: ((state: CallStateType) => {
+        /* empty */
+    }) as React.Dispatch<React.SetStateAction<CallStateType>>,
+
+    /**
+     * 콜 활성화 상태.
+     */
+    callActiveState: CallActiveState.INACTIVE,
+    setCallActiveState: ((state: CallActiveStateType) => {
+        /* empty */
+    }) as React.Dispatch<React.SetStateAction<CallActiveStateType>>,
+
+    /**
+     * 벨 상태.
+     */
+    bellState: BellState.SILENT,
+    setBellState: ((state: BellStateType) => {
+        /* empty */
+    }) as React.Dispatch<React.SetStateAction<BellStateType>>,
 
     /**
      * 음소거 상태.
@@ -41,6 +71,12 @@ export const OcxStateProvider = ({ children }: { children: React.ReactNode }) =>
     const [createDeviceState, setCreateDeviceState] =
         React.useState<CreateDeviceStateType>(CreateDeviceState.DISCONNECTED)
 
+    const [callState, setCallState] = React.useState<CallStateType>(CallState.IDLE)
+
+    const [callActiveState, setCallActiveState] = React.useState<CallActiveStateType>(CallActiveState.INACTIVE)
+
+    const [bellState, setBellState] = React.useState<BellStateType>(BellState.SILENT)
+
     const [muteState, setMuteState] = React.useState<MuteStateType>(MuteState.MIC_ON)
 
     const [dndState, setDndState] = React.useState<DndStateType>(DndState.DND_OFF)
@@ -50,6 +86,12 @@ export const OcxStateProvider = ({ children }: { children: React.ReactNode }) =>
             value={{
                 createDeviceState,
                 setCreateDeviceState,
+                callState,
+                setCallState,
+                callActiveState,
+                setCallActiveState,
+                bellState,
+                setBellState,
                 muteState,
                 setMuteState,
                 dndState,
