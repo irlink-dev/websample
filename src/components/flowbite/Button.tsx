@@ -16,9 +16,10 @@ interface ButtonProps {
     variant?: 'primary' | 'alternative' | 'dark' | 'light' | 'green' | 'red' | 'yellow' | 'purple'
     pill?: boolean
     onClick?: () => any
+    disabled?: boolean
 }
 
-const getStyles = (variant: string, pill?: boolean) => {
+const getStyles = (variant: string, pill?: boolean, disabled = false) => {
     let color = ''
 
     variant === 'primary' && (color = buttonPrimary)
@@ -30,15 +31,16 @@ const getStyles = (variant: string, pill?: boolean) => {
     variant === 'yellow' && (color = buttonYellow)
     variant === 'purple' && (color = buttonPurple)
 
-    return `${color} ${pill ? 'rounded-full' : 'rounded-lg'} `
+    return `${color} ${pill ? 'rounded-full' : 'rounded-lg'} ${disabled && 'cursor-not-allowed opacity-50'}`
 }
 
-const Button = ({ children, className, variant = 'primary', pill = false, onClick }: ButtonProps) => {
+const Button = ({ children, className, variant = 'primary', pill = false, onClick, disabled = false }: ButtonProps) => {
 
     return (
         <button
             onClick={onClick}
-            className={`${className} ${getStyles(variant, pill)}`}
+            className={`${className} ${getStyles(variant, pill, disabled)}`}
+            disabled={disabled}
         >
             {children}
         </button>
