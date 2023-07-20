@@ -1,9 +1,19 @@
-import { MuteState, toCreateDeviceState, toDndState, toMuteState } from '@/types/OcxState'
+import {
+    BellState,
+    CallState,
+    MuteState,
+    toBellState, toCallActiveState,
+    toCreateDeviceState,
+    toDndState,
+    toMuteState
+} from '@/types/OcxState'
 
 const useOcxEvents = (ocx: any, ocxStateContext: any) => {
 
     const {
         setCreateDeviceState,
+        setCallState,
+        setBellState,
         setMuteState,
         setDndState
     } = ocxStateContext
@@ -29,6 +39,8 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
      */
     ocx.DevOutGoing = (szPhoneNum: string) => {
         console.log(`[DevOutGoing] szPhoneNum: ${szPhoneNum}`)
+
+        setCallState(() => CallState.OUTBOUND)
     }
 
     /**
@@ -43,6 +55,8 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
      */
     ocx.DevCallConnected = (szCallInfo: string) => {
         console.log(`[DevCallConnected] szCallInfo: ${szCallInfo}`)
+
+        setCallState(() => CallState.CONNECTED)
     }
 
     /**
@@ -50,6 +64,8 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
      */
     ocx.DevCallEnd = (szCallInfo: string) => {
         console.log(`[DevCallEnd] szCallInfo: ${szCallInfo}`)
+
+        setCallState(() => CallState.IDLE)
     }
 
     /**
@@ -67,10 +83,10 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
     }
 
     /**
-     * 통화 상태 변경.
+     * 통화 중 여부.
      */
     ocx.DevCallState = (nResult: number) => {
-        console.log(`[DevCallState] nResult: ${nResult}`)
+        console.log(`[DevCallState] nResult: ${nResult} (${toCallActiveState(String(nResult))})`)
     }
 
     /**
@@ -140,7 +156,12 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
      * 인바운드 시.
      */
     ocx.DevBell = (szState: number) => {
-        console.log(`[DevBell] szState: ${szState}`)
+        console.log(`[DevBell] szState: ${szState} (${toBellState(String(szState))})`)
+
+        setBellState(() => szState)
+        if (String(szState) === BellState.RINGING) {
+            setCallState(() => CallState.INBOUND)
+        }
     }
 
     /**
