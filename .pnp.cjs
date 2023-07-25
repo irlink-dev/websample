@@ -35,6 +35,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:20.3.1"],\
             ["@types/react", "npm:18.2.12"],\
             ["@types/react-dom", "npm:18.2.5"],\
+            ["flowbite", "npm:1.7.0"],\
             ["next", "virtual:358b4c7cb3abdcdfa4a95e1c25294b6a8d39f7ae0e15bf953b55959e34d8d42d7e2b0d4b0ff2f43d159b91ac4864866f99e9c5815c4bb96e7a75fc6f5fb5b0bf#npm:13.4.5"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:358b4c7cb3abdcdfa4a95e1c25294b6a8d39f7ae0e15bf953b55959e34d8d42d7e2b0d4b0ff2f43d159b91ac4864866f99e9c5815c4bb96e7a75fc6f5fb5b0bf#npm:18.2.0"],\
@@ -935,6 +936,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["flowbite", [\
+        ["npm:1.7.0", {\
+          "packageLocation": "./.yarn/cache/flowbite-npm-1.7.0-82d589156c-3efa24064b.zip/node_modules/flowbite/",\
+          "packageDependencies": [\
+            ["flowbite", "npm:1.7.0"],\
+            ["@popperjs/core", "npm:2.11.8"],\
+            ["mini-svg-data-uri", "npm:1.4.4"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["function-bind", [\
         ["npm:1.1.1", {\
           "packageLocation": "./.yarn/cache/function-bind-npm-1.1.1-b56b322ae9-b32fbaebb3.zip/node_modules/function-bind/",\
@@ -1054,6 +1066,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["loose-envify", "npm:1.4.0"],\
             ["js-tokens", "npm:4.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["mini-svg-data-uri", [\
+        ["npm:1.4.4", {\
+          "packageLocation": "./.yarn/cache/mini-svg-data-uri-npm-1.4.4-929f6f1119-997f1fbd8d.zip/node_modules/mini-svg-data-uri/",\
+          "packageDependencies": [\
+            ["mini-svg-data-uri", "npm:1.4.4"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -1461,6 +1482,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:20.3.1"],\
             ["@types/react", "npm:18.2.12"],\
             ["@types/react-dom", "npm:18.2.5"],\
+            ["flowbite", "npm:1.7.0"],\
             ["next", "virtual:358b4c7cb3abdcdfa4a95e1c25294b6a8d39f7ae0e15bf953b55959e34d8d42d7e2b0d4b0ff2f43d159b91ac4864866f99e9c5815c4bb96e7a75fc6f5fb5b0bf#npm:13.4.5"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:358b4c7cb3abdcdfa4a95e1c25294b6a8d39f7ae0e15bf953b55959e34d8d42d7e2b0d4b0ff2f43d159b91ac4864866f99e9c5815c4bb96e7a75fc6f5fb5b0bf#npm:18.2.0"],\
