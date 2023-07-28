@@ -178,25 +178,24 @@ const CallPanel = ({ ocx }: CallPanelProps) => {
                     활성 상태 확인
                 </Button>
 
+                {/* Get Volume */}
+                <Button
+                    variant="alternative"
+                    onClick={() => getVolume()}
+                >
+                    볼륨 확인
+                </Button>
+
+                {/* Get Max Volume */}
+                <Button
+                    variant="alternative"
+                    onClick={() => getMaxVolume()}
+                >
+                    최대 볼륨 확인
+                </Button>
+
             </Card>
 
-
-
-            {/* Get Volume */}
-            <Button
-                variant="alternative"
-                onClick={() => getVolume()}
-            >
-                통화 볼륨 확인
-            </Button>
-
-            {/* Get Max Volume */}
-            <Button
-                variant="alternative"
-                onClick={() => getMaxVolume()}
-            >
-                최대 통화 볼륨 확인
-            </Button>
 
             {/* Set Volume */}
             <Button
