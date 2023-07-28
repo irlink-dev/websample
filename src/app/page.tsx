@@ -8,6 +8,7 @@ import RecordingPanel from '@/components/panels/RecordingPanel'
 import MessagePanel from '@/components/panels/MessagePanel'
 import UtilPanel from '@/components/panels/UtilPanel'
 import { OcxStateContext } from '@/components/context/OcxStateContext'
+import AlertInfoAccent from '@/components/flowbite/alert/AlertInfoAccent'
 
 declare global {
     interface Window {
@@ -39,6 +40,11 @@ const RootPage = () => {
 
     return (
         <>
+            {/* ALERT MESSAGE */}
+            <AlertInfoAccent>
+                법인폰을 사내 Wi-Fi에 연결하고, 웹에서 SSL 사설 인증서를 갱신해 주세요.
+            </AlertInfoAccent>
+
             {/* TOP BAR - CONNECTION PANEL */}
             <ConnectionPanel ocx={ocx} />
 
@@ -104,6 +110,7 @@ const RootPage = () => {
                 )}
 
             </div>
+
         </>
     )
 }

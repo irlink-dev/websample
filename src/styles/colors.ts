@@ -22,17 +22,17 @@ export const yellow =
 export const purple =
     'text-white bg-purple-700 hover:bg-purple-800 focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900'
 
-export const info =
-    'text-blue-800 bg-blue-50 dark:bg-gray-800 dark:text-blue-400'
 
-export const danger =
-    'text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400'
+const alert = { info: 'blue', danger: 'red', success: 'green', warning: 'yellow', semiDark: 'dark' }
 
-export const success =
-    'text-green-800 bg-green-50 dark:bg-gray-800 dark:text-green-400'
+const backgroundLight = (color: string) =>
+    `text-${color}-800 bg-${color}-50 dark:bg-gray-800 dark:text-${color}-${
+        color === 'yellow' || color === 'gray' ? '300' : '400'
+    }`
 
-export const warning =
-    'text-yellow-800 bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300'
+const alertBackground = Object.entries(alert).reduce((acc: { [key: string]: string }, [key, color]) => {
+    acc[key] = backgroundLight(color)
+    return acc
+}, {})
 
-export const semiDark =
-    'text-gray-800 bg-gray-50 dark:bg-gray-800 dark:text-gray-300'
+export const { info, danger, success, warning, semiDark } = alertBackground
