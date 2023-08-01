@@ -196,24 +196,23 @@ const CallPanel = ({ ocx }: CallPanelProps) => {
 
             </Card>
 
-
             {/* Set Volume */}
-            <Button
-                variant="alternative"
-                onClick={() => setVolume(1)}
-            >
-                <VolumeUp />
-                {/*<VolumeDown />*/}
-            </Button>
+            {/*<Button*/}
+            {/*    variant="alternative"*/}
+            {/*    onClick={() => setVolume(1)}*/}
+            {/*>*/}
+            {/*    <VolumeUp />*/}
+            {/*    /!*<VolumeDown />*!/*/}
+            {/*</Button>*/}
 
             {/* Check Call Availability */}
-            <Button
-                variant="alternative"
-                // onClick={() => checkAvailableCall()}
-                // onClick={() => getAvailableCall()}
-            >
-                통화 가능 여부 확인
-            </Button>
+            {/*<Button*/}
+            {/*    variant="alternative"*/}
+            {/*    // onClick={() => checkAvailableCall()}*/}
+            {/*    // onClick={() => getAvailableCall()}*/}
+            {/*>*/}
+            {/*    통화 가능 여부 확인*/}
+            {/*</Button>*/}
 
         </>
     )

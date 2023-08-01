@@ -28,12 +28,11 @@ const RootPage = () => {
         setOcx(() => ocx)
     }, [])
 
-    const CALL_PANEL = 1
-    const RECORDING_PANEL = 2
+    const CALL_RECORD_PANEL = 1
     const MESSAGE_PANEL = 3
     const UTIL_PANEL = 4
 
-    const [tab, setTab] = React.useState<number>(CALL_PANEL)
+    const [tab, setTab] = React.useState<number>(CALL_RECORD_PANEL)
 
     const TAB = 'inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50'
     const TAB_SELECTED = 'inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg'
@@ -57,19 +56,10 @@ const RootPage = () => {
 
                         <li className="mr-2">
                             <button
-                                className={tab === CALL_PANEL ? TAB_SELECTED : TAB}
-                                onClick={() => setTab(() => CALL_PANEL)}
+                                className={tab === CALL_RECORD_PANEL ? TAB_SELECTED : TAB}
+                                onClick={() => setTab(() => CALL_RECORD_PANEL)}
                             >
-                                Call Panel
-                            </button>
-                        </li>
-
-                        <li className="mr-2">
-                            <button
-                                className={tab === RECORDING_PANEL ? TAB_SELECTED : TAB}
-                                onClick={() => setTab(() => RECORDING_PANEL)}
-                            >
-                                Recording Panel
+                                Call & Record Panel
                             </button>
                         </li>
 
@@ -96,11 +86,11 @@ const RootPage = () => {
                 </div>
 
                 {/* TAB CONTENTS */}
-                {tab === CALL_PANEL && (
-                    <CallPanel ocx={ocx} />
-                )}
-                {tab === RECORDING_PANEL && (
-                    <RecordingPanel ocx={ocx} />
+                {tab === CALL_RECORD_PANEL && (
+                    <>
+                        <CallPanel ocx={ocx} />
+                        <RecordingPanel ocx={ocx} />
+                    </>
                 )}
                 {tab === MESSAGE_PANEL && (
                     <MessagePanel ocx={ocx} />
