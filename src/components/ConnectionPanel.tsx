@@ -2,10 +2,12 @@ import * as React from 'react'
 import useOcxMethods from '@/hooks/useOcxMethods'
 import useLocalStorage from '@/hooks/useLocalStorage'
 import Button from '@/components/Button'
-import Input from '@/components/Input'
+// import Input from '@/components/Input'
 import { OcxStateContext } from '@/contexts/OcxStateContext'
 import { CreateDeviceState } from '@/types/OcxState'
-import { PhonelinkErase, PhonelinkLock } from '@mui/icons-material'
+import { OutlineButton, SolidButton } from '@/components/preline/Button'
+import Input from '@/components/preline/Input'
+import WindowBlock from '@/components/WindowBlock'
 
 const LOCAL_STORAGE_VALUES_KEY = `ir_web_sample:connection_panel:values`
 
@@ -21,7 +23,7 @@ interface ConnectionPanelData {
 const ConnectionPanel = ({ ocx }: ConnectionPanelProps) => {
   const { createDeviceState } = React.useContext(OcxStateContext)
 
-  const { createDevice, closeDevice, setUserInput } = useOcxMethods(ocx)
+  const { createDevice, closeDevice } = useOcxMethods(ocx)
 
   const { getLocalStorageData, setLocalStorageData } = useLocalStorage()
 
@@ -74,65 +76,32 @@ const ConnectionPanel = ({ ocx }: ConnectionPanelProps) => {
         {/* RIGHT SIDE */}
         <div className="flex gap-2">
           {String(createDeviceState) === CreateDeviceState.PAIRED && (
-            <>
-              {/* Screen Block Enable */}
-              <Button
-                variant="light"
-                className=""
-                onClick={() => setUserInput(0)}
-              >
-                <PhonelinkLock sx={{ color: '#777777' }} />
-              </Button>
-
-              {/* Screen Block Disable */}
-              <Button variant="light" onClick={() => setUserInput(1)}>
-                <PhonelinkErase sx={{ color: '#777777' }} />
-              </Button>
-            </>
+            <WindowBlock ocx={ocx} />
           )}
 
-          {/* Server URL Input Field */}
+          {/* 서버 URL */}
           <Input
-            className={`bg-white ${
-              String(createDeviceState) === CreateDeviceState.PAIRED &&
-              'opacity-70 text-gray-500 cursor-not-allowed'
-            }`}
-            width={52}
-            placeholder="서버 URL"
+            placeholder="Server URL"
             value={serverUrl}
             onChange={(event) => handleServerUrlChange(event)}
             disabled={String(createDeviceState) === CreateDeviceState.PAIRED}
-          />
+          ></Input>
 
-          {/* Phone Number Input Field */}
+          {/* 법인폰 번호 */}
           <Input
-            className={`bg-white ${
-              String(createDeviceState) === CreateDeviceState.PAIRED &&
-              'opacity-70 text-gray-500 cursor-not-allowed'
-            }`}
-            placeholder="법인폰 번호"
+            placeholder="01099990000"
             value={phoneNumber}
             onChange={(event) => handlePhoneNumberChange(event)}
             disabled={String(createDeviceState) === CreateDeviceState.PAIRED}
-          />
+          ></Input>
 
           {/* Connect & Disconnect Buttons */}
           {String(createDeviceState) === CreateDeviceState.PAIRED ? (
-            <Button
-              variant="red"
-              className="w-24"
-              onClick={() => closeDevice()}
-            >
-              Disconnect
-            </Button>
+            <SolidButton onClick={() => closeDevice()}>Disconnect</SolidButton>
           ) : (
-            <Button
-              variant="green"
-              className="w-24"
-              onClick={() => createDevice(serverUrl, phoneNumber)}
-            >
+            <OutlineButton onClick={() => createDevice(serverUrl, phoneNumber)}>
               Connect
-            </Button>
+            </OutlineButton>
           )}
         </div>
       </div>

@@ -2,6 +2,7 @@ import * as React from 'react'
 import useOcxMethods from '@/hooks/useOcxMethods'
 import useLocalStorage from '@/hooks/useLocalStorage'
 import Button from '@/components/Button'
+import { SolidButton, OutlineButton } from '@/components/preline/Button'
 import Input from '@/components/Input'
 import Card from '@/components/Card'
 import { BellState, CallState, DndState, MuteState } from '@/types/OcxState'
@@ -122,13 +123,13 @@ const CallPanel = ({ ocx }: CallPanelProps) => {
           }
         >
           {String(bellState) === BellState.RINGING ? (
-            <Button variant="green" onClick={() => setHookMode(3)}>
+            <SolidButton onClick={() => setHookMode(3)}>
               <PhoneCallback sx={{ width: '20px', height: '20px' }} /> 전화 받기
-            </Button>
+            </SolidButton>
           ) : (
-            <Button variant="green" onClick={() => setDialStr(phoneNumber)}>
+            <SolidButton onClick={() => setDialStr(phoneNumber)}>
               <Call sx={{ width: '20px', height: '20px' }} /> 전화 걸기
-            </Button>
+            </SolidButton>
           )}
         </div>
 
@@ -146,19 +147,17 @@ const CallPanel = ({ ocx }: CallPanelProps) => {
         </div>
 
         {/* Get Call Active Status */}
-        <Button variant="alternative" onClick={() => getCallState()}>
+        <OutlineButton onClick={() => getCallState()}>
           활성 상태 확인
-        </Button>
+        </OutlineButton>
 
         {/* Get Volume */}
-        <Button variant="alternative" onClick={() => getVolume()}>
-          볼륨 확인
-        </Button>
+        <OutlineButton onClick={() => getVolume()}>볼륨 확인</OutlineButton>
 
         {/* Get Max Volume */}
-        <Button variant="alternative" onClick={() => getMaxVolume()}>
+        <OutlineButton onClick={() => getMaxVolume()}>
           최대 볼륨 확인
-        </Button>
+        </OutlineButton>
       </Card>
 
       {/* Set Volume */}

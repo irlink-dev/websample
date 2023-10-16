@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useContext } from 'react'
 import useOcxEvents from '@/hooks/useOcxEvents'
 import ConnectionPanel from '@/components/ConnectionPanel'
 import CallPanel from '@/components/CallPanel'
@@ -17,9 +17,8 @@ declare global {
 }
 
 const RootPage = () => {
-  const [ocx, setOcx] = React.useState<any>(null)
-
-  const ocxStateContext = React.useContext(OcxStateContext)
+  const [ocx, setOcx] = useState<any>(null)
+  const ocxStateContext = useContext(OcxStateContext)
 
   React.useEffect(() => {
     const _ocx = new window.IRWebSocketClient() // 객체 생성.
