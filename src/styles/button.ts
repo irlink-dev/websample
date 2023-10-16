@@ -1,4 +1,13 @@
-import { primary, alternative, dark, light, green, red, yellow, purple } from '@/styles/colors'
+import {
+  primary,
+  alternative,
+  dark,
+  light,
+  green,
+  red,
+  yellow,
+  purple,
+} from '@/styles/colors'
 
 export const buttonOutline = 'focus:outline-none focus:ring-4'
 

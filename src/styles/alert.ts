@@ -15,7 +15,10 @@ export const alertWarning = `${alert} ${warning}`
 
 export const alertDark = `${alert} ${semiDark}`
 
-export const alertBorder = (color: string) => `border border-${color}-300 dark:border-${color}-${color === 'gray' ? '600' : '800'}`
+export const alertBorder = (color: string) =>
+  `border border-${color}-300 dark:border-${color}-${
+    color === 'gray' ? '600' : '800'
+  }`
 
 export const alertInfoBorder = `${alertInfo} ${alertBorder('blue')}`
 
