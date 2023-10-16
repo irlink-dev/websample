@@ -2,13 +2,13 @@
 
 import React from 'react'
 import useOcxEvents from '@/hooks/useOcxEvents'
-import ConnectionPanel from '@/components/panels/ConnectionPanel'
-import CallPanel from '@/components/panels/CallPanel'
-import RecordingPanel from '@/components/panels/RecordingPanel'
-import MessagePanel from '@/components/panels/MessagePanel'
-import UtilPanel from '@/components/panels/UtilPanel'
-import { OcxStateContext } from '@/components/context/OcxStateContext'
-import AlertInfoAccent from '@/components/flowbite/alert/AlertInfoAccent'
+import ConnectionPanel from '@/components/ConnectionPanel'
+import CallPanel from '@/components/CallPanel'
+import RecordingPanel from '@/components/RecordingPanel'
+import MessagePanel from '@/components/MessagePanel'
+import UtilPanel from '@/components/UtilPanel'
+import { OcxStateContext } from '@/contexts/OcxStateContext'
+import AlertInfoAccent from '@/components/AlertInfoAccent'
 
 declare global {
   interface Window {

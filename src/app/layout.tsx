@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { OcxStateProvider } from '@/components/context/OcxStateContext'
+import { OcxStateProvider } from '@/contexts/OcxStateContext'
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
