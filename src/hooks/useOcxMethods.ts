@@ -51,6 +51,15 @@ const useOcxMethods = (ocx: any) => {
     ocx.GetSavePath()
   }
 
+  const setSavePath = (
+    saveState: number,
+    uploadUrl: string,
+    uploadPath: string,
+    isIncludeDate: number,
+  ) => {
+    ocx.SetSavePath(saveState, uploadUrl, uploadPath, isIncludeDate)
+  }
+
   const getFileList = () => {
     ocx.GetFileList()
   }
@@ -126,6 +135,7 @@ const useOcxMethods = (ocx: any) => {
     setVolume,
     setDnd,
     getSavePath,
+    setSavePath,
     getFileList,
     setUploadFile,
     setRecPartial,
