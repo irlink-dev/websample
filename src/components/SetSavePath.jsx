@@ -3,7 +3,6 @@ import Input from '@/components/preline/Input'
 import { SolidButton } from '@/components/preline/Button'
 import useOcxMethods from '@/hooks/useOcxMethods'
 import useLocalStorage from '@/hooks/useLocalStorage'
-import { Style } from '@/enums/Style'
 
 const SetSavePath = ({ ocx }) => {
   const LOCAL_STORAGE_SET_SAVE_PATH_KEY = 'WebSample.SET_SAVE_PATH'
@@ -22,7 +21,7 @@ const SetSavePath = ({ ocx }) => {
         onChange={(event) => setUploadUrl(event.target.value)}
       ></Input>
       <button
-        className={Style.BUTTON_SOFT}
+        className={ButtonStyles.PRELINE_SOFT}
         onClick={() => {
           setSavePath(2, uploadUrl, '', 1)
           setLocalStorageData(LOCAL_STORAGE_SET_SAVE_PATH_KEY, uploadUrl)

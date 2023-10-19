@@ -3,7 +3,8 @@ import { OcxStateContext } from '@/contexts/OcxStateContext'
 import useOcxMethods from '@/hooks/useOcxMethods'
 import useLocalStorage from '@/hooks/useLocalStorage'
 import { CreateDeviceState } from '@/types/OcxState'
-import { Style } from '@/enums/Style'
+import { ButtonStyles } from '@/enums/styles/ButtonStyles'
+import { InputStyles } from '@/enums/styles/InputStyles'
 
 const ConnectionUnit = ({ ocx }) => {
   const { createDeviceState } = useContext(OcxStateContext)
@@ -12,7 +13,7 @@ const ConnectionUnit = ({ ocx }) => {
 
   const LOCAL_STORAGE_CONNECTION_UNIT_DATA = 'WEBSAMPLE:CONNECTION_UNIT:DATA'
   const IS_PAIRED = String(createDeviceState) === CreateDeviceState.PAIRED
-  const INPUT_STYLE = Style.INPUT + `${IS_PAIRED && 'cursor-not-allowed'}`
+  const INPUT_STYLE = InputStyles.PRELINE_BASIC + `${IS_PAIRED && 'cursor-not-allowed'}`
 
   const [data, setData] = useState(() => {
     const data = getLocalStorageData(LOCAL_STORAGE_CONNECTION_UNIT_DATA)
@@ -51,7 +52,7 @@ const ConnectionUnit = ({ ocx }) => {
       {IS_PAIRED ? (
         <button
           type="button"
-          className={Style.SOLID_BUTTON}
+          className={ButtonStyles.PRELINE_SOLID}
           onClick={() => closeDevice()}
         >
           Disconnect
@@ -59,7 +60,7 @@ const ConnectionUnit = ({ ocx }) => {
       ) : (
         <button
           type="button"
-          className={Style.OUTLINE_BUTTON}
+          className={ButtonStyles.PRELINE_OUTLINE}
           onClick={() => createDevice(serverUrl, phoneNumber)}
         >
           Connect

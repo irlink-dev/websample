@@ -325,3 +325,8 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
 }
 
 export default useOcxEvents
+
+/**
+ * @todo console.log 상 Method, Event Emoji 구분하여 모두 기록.
+ * @todo toXXXState 함수 deprecate. enum 활용.
+ */

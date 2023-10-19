@@ -12,7 +12,6 @@ import AlertInfoAccent from '@/components/AlertInfoAccent'
 import SetSavePath from '@/components/SetSavePath.jsx'
 import WindowBlock from '@/components/unit/WindowBlock'
 import ConnectionUnit from '@/components/unit/ConnectionUnit'
-import { Style } from '@/enums/Style'
 import CallUnit from '@/components/unit/CallUnit'
 
 declare global {

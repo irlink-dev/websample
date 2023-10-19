@@ -1,10 +1,11 @@
 import { OcxStateContext } from '@/contexts/OcxStateContext'
-import { Style } from '@/enums/Style'
+import { ButtonStyles } from '@/enums/styles/ButtonStyles'
 import useLocalStorage from '@/hooks/useLocalStorage'
 import useOcxMethods from '@/hooks/useOcxMethods'
 import { BellState, CallState } from '@/types/OcxState'
 import { Call, CallEnd, PhoneCallback } from '@mui/icons-material'
 import { useContext, useEffect, useState } from 'react'
+import { InputStyles } from '@/enums/styles/InputStyles'
 
 const CallUnit = ({ ocx }) => {
   const { callState, bellState } = useContext(OcxStateContext)
@@ -31,7 +32,7 @@ const CallUnit = ({ ocx }) => {
     <div className="w-full flex flex-col gap-2 p-5 bg-white">
       <input
         placeholder="고객 전화번호"
-        className={Style.INPUT}
+        className={InputStyles.PRELINE_BASIC}
         value={phoneNumber}
         onChange={(event) => onPhoneNumberChange(event)}
       ></input>
@@ -48,14 +49,14 @@ const CallUnit = ({ ocx }) => {
       >
         {String(bellState) === BellState.RINGING ? (
           <button
-            className={Style.SOLID_BUTTON + 'w-full'}
+            className={ButtonStyles.PRELINE_SOLID + 'w-full'}
             onClick={() => setHookMode(3)}
           >
             <PhoneCallback sx={{ width: '20px', height: '20px' }} /> 전화 받기
           </button>
         ) : (
           <button
-            className={Style.SOLID_BUTTON + 'w-full'}
+            className={ButtonStyles.PRELINE_SOLID + 'w-full'}
             onClick={() => setDialStr(phoneNumber)}
           >
             <Call sx={{ width: '20px', height: '20px' }} /> 전화 걸기
@@ -67,14 +68,14 @@ const CallUnit = ({ ocx }) => {
       <div className={String(callState) === CallState.IDLE ? 'hidden' : ''}>
         {String(bellState) === BellState.RINGING ? (
           <button
-            className={Style.BUTTON_SOFT + 'w-full'}
+            className={ButtonStyles.PRELINE_SOFT + 'w-full'}
             onClick={() => setHookMode(1)}
           >
             <CallEnd sx={{ width: '20px', height: '20px' }} /> 전화 거절
           </button>
         ) : (
           <button
-            className={Style.BUTTON_SOFT + 'w-full'}
+            className={ButtonStyles.PRELINE_SOFT + 'w-full'}
             onClick={() => setHookMode(1)}
           >
             <CallEnd sx={{ width: '20px', height: '20px' }} /> 전화 끊기

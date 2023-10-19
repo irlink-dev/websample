@@ -8,7 +8,6 @@ import Card from '@/components/Card'
 import { BellState, CallState, DndState, MuteState } from '@/types/OcxState'
 import { OcxStateContext } from '@/contexts/OcxStateContext'
 import CallUnit from '@/components/unit/CallUnit'
-import { Style } from '@/enums/Style'
 import {
   Call,
   CallEnd,
