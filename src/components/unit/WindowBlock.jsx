@@ -13,18 +13,18 @@ const WindowBlock = ({ ocx }) => {
   return (
     <div className="w-full">
       {IS_PAIRED && (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-row gap-2">
           <button
-            className={Style.OUTLINE_BUTTON + ''}
+            className={Style.OUTLINE_BUTTON + 'w-1/2'}
             onClick={() => setUserInput(0)}
           >
-            Block window
+            상판 막기
           </button>
           <button
-            className={Style.OUTLINE_BUTTON + ''}
+            className={Style.OUTLINE_BUTTON + 'w-1/2'}
             onClick={() => setUserInput(1)}
           >
-            Unblock window
+            상판 해제
           </button>
         </div>
       )}

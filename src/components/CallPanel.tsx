@@ -7,6 +7,8 @@ import Input from '@/components/Input'
 import Card from '@/components/Card'
 import { BellState, CallState, DndState, MuteState } from '@/types/OcxState'
 import { OcxStateContext } from '@/contexts/OcxStateContext'
+import CallUnit from '@/components/unit/CallUnit'
+import { Style } from '@/enums/Style'
 import {
   Call,
   CallEnd,
@@ -31,12 +33,9 @@ interface CallPanelData {
 }
 
 const CallPanel = ({ ocx }: CallPanelProps) => {
-  const { callState, bellState, muteState, dndState } =
-    React.useContext(OcxStateContext)
+  const { muteState, dndState } = React.useContext(OcxStateContext)
 
   const {
-    setDialStr,
-    setHookMode,
     getCallState,
     getVolume,
     getMaxVolume,
@@ -44,32 +43,6 @@ const CallPanel = ({ ocx }: CallPanelProps) => {
     setVolume,
     setDnd,
   } = useOcxMethods(ocx)
-
-  const { getLocalStorageData, setLocalStorageData } = useLocalStorage()
-
-  const [data, setData] = React.useState<CallPanelData>(() => {
-    const storageData = getLocalStorageData(LOCAL_STORAGE_VALUES_KEY)
-    return storageData
-      ? storageData
-      : {
-          phoneNumber: '',
-        }
-  })
-
-  const { phoneNumber } = data
-
-  React.useEffect(() => {
-    setLocalStorageData(LOCAL_STORAGE_VALUES_KEY, data)
-  }, [data])
-
-  const handlePhoneNumberChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    setData({
-      ...data,
-      phoneNumber: event.target.value,
-    })
-  }
 
   return (
     <>
@@ -105,46 +78,6 @@ const CallPanel = ({ ocx }: CallPanelProps) => {
             <MicOff />
           </Button>
         )}
-
-        {/* Customer Phone Number Input Field */}
-        <Input
-          placeholder="고객 전화번호"
-          value={phoneNumber}
-          onChange={(event) => handlePhoneNumberChange(event)}
-        />
-
-        {/* Hook Off */}
-        <div
-          className={
-            String(callState) === CallState.CONNECTED ||
-            String(callState) === CallState.OUTBOUND
-              ? 'hidden'
-              : ''
-          }
-        >
-          {String(bellState) === BellState.RINGING ? (
-            <SolidButton onClick={() => setHookMode(3)}>
-              <PhoneCallback sx={{ width: '20px', height: '20px' }} /> 전화 받기
-            </SolidButton>
-          ) : (
-            <SolidButton onClick={() => setDialStr(phoneNumber)}>
-              <Call sx={{ width: '20px', height: '20px' }} /> 전화 걸기
-            </SolidButton>
-          )}
-        </div>
-
-        {/* Hook On */}
-        <div className={String(callState) === CallState.IDLE ? 'hidden' : ''}>
-          {String(bellState) === BellState.RINGING ? (
-            <Button variant="red" onClick={() => setHookMode(1)}>
-              <CallEnd sx={{ width: '20px', height: '20px' }} /> 전화 거절
-            </Button>
-          ) : (
-            <Button variant="red" onClick={() => setHookMode(1)}>
-              <CallEnd sx={{ width: '20px', height: '20px' }} /> 전화 끊기
-            </Button>
-          )}
-        </div>
 
         {/* Get Call Active Status */}
         <OutlineButton onClick={() => getCallState()}>

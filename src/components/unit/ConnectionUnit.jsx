@@ -49,11 +49,16 @@ const ConnectionUnit = ({ ocx }) => {
       ></input>
 
       {IS_PAIRED ? (
-        <button className={Style.SOLID_BUTTON} onClick={() => closeDevice()}>
+        <button
+          type="button"
+          className={Style.SOLID_BUTTON}
+          onClick={() => closeDevice()}
+        >
           Disconnect
         </button>
       ) : (
         <button
+          type="button"
           className={Style.OUTLINE_BUTTON}
           onClick={() => createDevice(serverUrl, phoneNumber)}
         >

@@ -12,6 +12,8 @@ import AlertInfoAccent from '@/components/AlertInfoAccent'
 import SetSavePath from '@/components/SetSavePath.jsx'
 import WindowBlock from '@/components/unit/WindowBlock'
 import ConnectionUnit from '@/components/unit/ConnectionUnit'
+import { Style } from '@/enums/Style'
+import CallUnit from '@/components/unit/CallUnit'
 
 declare global {
   interface Window {
@@ -37,33 +39,36 @@ const RootPage = () => {
       </AlertInfoAccent>
 
       {/* 연결 패널 */}
-      <section className="w-full px-5 border-b-2 border-[#eeeeee]">
-        <div className="max-w-screen-lg mx-auto flex flex-col items-center justify-between py-5 md:flex-row md:py-2">
+      <section className="w-full p-5 border-b-2 border-[#eeeeee]">
+        <div className="max-w-screen-lg mx-auto flex flex-col items-center justify-between md:flex-row">
           <h1 className="text-lg font-medium hidden md:block text-[#333333]">
             WEB SAMPLE
           </h1>
 
-          <div className="w-full md:w-auto flex flex-col items-center gap-2 md:flex-row">
+          <div className="w-full flex flex-col items-center gap-2">
             <ConnectionUnit ocx={ocx} />
             <WindowBlock ocx={ocx} />
           </div>
         </div>
       </section>
 
-      <main className="bg-[#fafafa] pt-5">
-        {/* 업로드 패널 */}
-        <div className="max-w-screen-lg mx-auto">
+      <main className="bg-[#fafafa]">
+        <section className="p-5">
           <SetSavePath ocx={ocx} />
-        </div>
+        </section>
 
-        <div className="max-w-screen-lg mx-auto mt-5">
+        <div className="flex flex-col gap-2">
+          <section className="border-y-2 border-[#eeeeee]">
+            <CallUnit ocx={ocx} />
+          </section>
+
           <CallPanel ocx={ocx} />
           <RecordingPanel ocx={ocx} />
           <MessagePanel ocx={ocx} />
           <UtilPanel ocx={ocx} />
-        </div>
 
-        <span className="text-xs text-[#777777]">Socket.io Client v2</span>
+          <span className="text-xs text-[#777777]">Socket.io Client v2</span>
+        </div>
       </main>
     </>
   )
