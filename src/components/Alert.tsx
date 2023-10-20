@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-const AlertInfoAccent = ({ children }: { children: React.ReactNode }) => {
+const Alert = ({ children }: { children: React.ReactNode }) => {
   const [isHidden, setIsHidden] = React.useState(false)
 
   if (isHidden) {
@@ -50,4 +50,4 @@ const AlertInfoAccent = ({ children }: { children: React.ReactNode }) => {
   )
 }
 
-export default AlertInfoAccent
+export default Alert

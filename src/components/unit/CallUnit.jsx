@@ -29,7 +29,7 @@ const CallUnit = ({ ocx }) => {
     setData({ ...data, phoneNumber: event.target.value })
 
   return (
-    <div className="w-full flex flex-col gap-2 p-5 bg-white">
+    <>
       <input
         placeholder="고객 전화번호"
         className={InputStyles.PRELINE_BASIC}
@@ -82,7 +82,7 @@ const CallUnit = ({ ocx }) => {
           </button>
         )}
       </div>
-    </div>
+    </>
   )
 }
 

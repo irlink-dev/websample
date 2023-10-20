@@ -1,50 +1,39 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { OcxStateContext } from '@/contexts/OcxStateContext'
 import useOcxMethods from '@/hooks/useOcxMethods'
-import useLocalStorage from '@/hooks/useLocalStorage'
 import { CreateDeviceState } from '@/types/OcxState'
 import { ButtonStyles } from '@/enums/styles/ButtonStyles'
 import { InputStyles } from '@/enums/styles/InputStyles'
+import useInput from '@/hooks/useInput'
 
 const ConnectionUnit = ({ ocx }) => {
   const { createDeviceState } = useContext(OcxStateContext)
   const { createDevice, closeDevice } = useOcxMethods(ocx)
-  const { getLocalStorageData, setLocalStorageData } = useLocalStorage()
 
-  const LOCAL_STORAGE_CONNECTION_UNIT_DATA = 'WEBSAMPLE:CONNECTION_UNIT:DATA'
-  const IS_PAIRED = String(createDeviceState) === CreateDeviceState.PAIRED
-  const INPUT_STYLE = InputStyles.PRELINE_BASIC + `${IS_PAIRED && 'cursor-not-allowed'}`
-
-  const [data, setData] = useState(() => {
-    const data = getLocalStorageData(LOCAL_STORAGE_CONNECTION_UNIT_DATA)
-    return data ? data : { serverUrl: '', phoneNumber: '' }
+  const { data, onChange } = useInput('WEB_SAMPLE_CONNECTION_UNIT_DATA', {
+    serverUrl: '',
+    phoneNumber: '',
   })
 
-  useEffect(() => {
-    setLocalStorageData(LOCAL_STORAGE_CONNECTION_UNIT_DATA, data)
-  }, [data])
-
-  const { serverUrl, phoneNumber } = data
-
-  const onPhoneNumberChange = (event) =>
-    setData({ ...data, phoneNumber: event.target.value })
-
-  const onServerUrlChange = (event) =>
-    setData({ ...data, serverUrl: event.target.value })
+  const IS_PAIRED = String(createDeviceState) === CreateDeviceState.PAIRED
+  const INPUT_STYLE =
+    InputStyles.PRELINE_BASIC + `${IS_PAIRED && 'cursor-not-allowed'}`
 
   return (
     <div className="flex flex-col gap-2 w-full">
       <input
-        placeholder="Server URL"
-        value={serverUrl}
-        onChange={(event) => onServerUrlChange(event)}
+        placeholder="서버 URL"
+        value={data.serverUrl}
+        name="serverUrl"
+        onChange={onChange}
         className={INPUT_STYLE + ''}
         disabled={IS_PAIRED}
       ></input>
       <input
-        placeholder="01099990000"
-        value={phoneNumber}
-        onChange={(event) => onPhoneNumberChange(event)}
+        placeholder="법인폰 번호"
+        value={data.phoneNumber}
+        name="phoneNumber"
+        onChange={onChange}
         className={INPUT_STYLE + ''}
         disabled={IS_PAIRED}
       ></input>
@@ -55,15 +44,15 @@ const ConnectionUnit = ({ ocx }) => {
           className={ButtonStyles.PRELINE_SOLID}
           onClick={() => closeDevice()}
         >
-          Disconnect
+          CLOSE_DEVICE
         </button>
       ) : (
         <button
           type="button"
           className={ButtonStyles.PRELINE_OUTLINE}
-          onClick={() => createDevice(serverUrl, phoneNumber)}
+          onClick={() => createDevice(data.serverUrl, data.phoneNumber)}
         >
-          Connect
+          CREATE_DEVICE
         </button>
       )}
     </div>

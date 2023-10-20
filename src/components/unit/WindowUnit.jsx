@@ -4,7 +4,7 @@ import { OcxStateContext } from '@/contexts/OcxStateContext'
 import { CreateDeviceState } from '@/types/OcxState'
 import { ButtonStyles } from '@/enums/styles/ButtonStyles'
 
-const WindowBlock = ({ ocx }) => {
+const WindowUnit = ({ ocx }) => {
   const { setUserInput } = useOcxMethods(ocx)
   const { createDeviceState } = useContext(OcxStateContext)
 
@@ -13,15 +13,15 @@ const WindowBlock = ({ ocx }) => {
   return (
     <div className="w-full">
       {IS_PAIRED && (
-        <div className="flex flex-row gap-2">
+        <div className="grid grid-cols-2 gap-2">
           <button
-            className={ButtonStyles.PRELINE_OUTLINE + 'w-1/2'}
+            className={ButtonStyles.PRELINE_OUTLINE}
             onClick={() => setUserInput(0)}
           >
             상판 막기
           </button>
           <button
-            className={ButtonStyles.PRELINE_OUTLINE + 'w-1/2'}
+            className={ButtonStyles.PRELINE_OUTLINE}
             onClick={() => setUserInput(1)}
           >
             상판 해제
@@ -32,4 +32,4 @@ const WindowBlock = ({ ocx }) => {
   )
 }
 
-export default WindowBlock
+export default WindowUnit
