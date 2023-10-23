@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { OcxStateContext } from '@/contexts/OcxStateContext'
 import useOcxMethods from '@/hooks/useOcxMethods'
-import { CreateDeviceState } from '@/types/OcxState'
+import { CreateDeviceState } from '@/enums/OcxState'
 import { ButtonStyles } from '@/enums/styles/ButtonStyles'
 import { InputStyles } from '@/enums/styles/InputStyles'
 import useInput from '@/hooks/useInput'
@@ -10,12 +10,12 @@ const ConnectionUnit = ({ ocx }) => {
   const { createDeviceState } = useContext(OcxStateContext)
   const { createDevice, closeDevice } = useOcxMethods(ocx)
 
-  const { data, onChange } = useInput('WEB_SAMPLE_CONNECTION_UNIT_DATA', {
+  const { data, onChange } = useInput({
     serverUrl: '',
     phoneNumber: '',
-  })
+  }, 'WEB_SAMPLE_CONNECTION_UNIT_DATA')
 
-  const IS_PAIRED = String(createDeviceState) === CreateDeviceState.PAIRED
+  const IS_PAIRED = createDeviceState === CreateDeviceState.PAIRED
   const INPUT_STYLE =
     InputStyles.PRELINE_BASIC + `${IS_PAIRED && 'cursor-not-allowed'}`
 

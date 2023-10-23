@@ -1,33 +1,29 @@
-import { useState } from 'react'
 import useOcxMethods from 'src/hooks/useOcxMethods'
-import useLocalStorage from 'src/hooks/useLocalStorage'
 import { ButtonStyles } from 'src/enums/styles/ButtonStyles'
 import { InputStyles } from 'src/enums/styles/InputStyles'
+import useInput from '@/hooks/useInput'
 
 const UploadPathUnit = ({ ocx }) => {
-  const LOCAL_STORAGE_SET_SAVE_PATH_KEY = 'WebSample.SET_SAVE_PATH'
   const { setSavePath, getSavePath } = useOcxMethods(ocx)
-  const { setLocalStorageData, getLocalStorageData } = useLocalStorage()
 
-  const [uploadUrl, setUploadUrl] = useState(() => {
-    const uploadUrl = getLocalStorageData(LOCAL_STORAGE_SET_SAVE_PATH_KEY)
-    return uploadUrl ? uploadUrl : ''
-  })
+  const { data, onChange } = useInput({
+    uploadUrl: ''
+  }, 'WEB_SAMPLE_UPLOAD_PATH_DATA')
 
   return (
     <section className="p-5">
       <div className="ml-auto flex flex-col gap-2">
         <input
-          className={InputStyles.PRELINE_BASIC}
           placeholder="서버 URL"
-          value={uploadUrl}
-          onChange={(event) => setUploadUrl(event.target.value)}
+          className={InputStyles.PRELINE_BASIC}
+          name='uploadUrl'
+          value={data.uploadUrl}
+          onChange={onChange}
         ></input>
         <button
           className={ButtonStyles.PRELINE_SOFT}
           onClick={() => {
-            setSavePath(2, uploadUrl, '', 1)
-            setLocalStorageData(LOCAL_STORAGE_SET_SAVE_PATH_KEY, uploadUrl)
+            setSavePath(2, data.uploadUrl, '', 1)
           }}
         >
           SET_SAVE_PATH

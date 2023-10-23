@@ -7,12 +7,12 @@ import { Publish } from '@mui/icons-material'
 const UploadUnit = ({ ocx }) => {
   const { setUploadFile, getFileList } = useOcxMethods(ocx)
 
-  const { data, onChange } = useInput('WEB_SAMPLE_UPLOAD_UNIT_DATA', {
+  const { data, onChange } = useInput({
     localFileName: '',
     serverFileName: '',
     serverUrl: '',
     fileSavePath: '',
-  })
+  }, 'WEB_SAMPLE_UPLOAD_UNIT_DATA')
 
   return (
     <>

@@ -1,53 +1,40 @@
 import { OcxStateContext } from '@/contexts/OcxStateContext'
 import { ButtonStyles } from '@/enums/styles/ButtonStyles'
-import useLocalStorage from '@/hooks/useLocalStorage'
 import useOcxMethods from '@/hooks/useOcxMethods'
-import { BellState, CallState } from '@/types/OcxState'
+import { BellState, CallState } from '@/enums/OcxState'
 import { Call, CallEnd, PhoneCallback } from '@mui/icons-material'
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { InputStyles } from '@/enums/styles/InputStyles'
+import useInput from '@/hooks/useInput'
 
 const CallUnit = ({ ocx }) => {
   const { callState, bellState } = useContext(OcxStateContext)
   const { setDialStr, setHookMode } = useOcxMethods(ocx)
-  const { getLocalStorageData, setLocalStorageData } = useLocalStorage()
 
-  const LOCAL_STORAGE_CALL_UNIT_DATA = 'WEBSAMPLE:CALL_UNIT:DATA'
-
-  const [data, setData] = useState(() => {
-    const data = getLocalStorageData(LOCAL_STORAGE_CALL_UNIT_DATA)
-    return data ? data : { phoneNumber: '' }
-  })
-
-  useEffect(() => {
-    setLocalStorageData(LOCAL_STORAGE_CALL_UNIT_DATA, data)
-  }, [data])
-
-  const { phoneNumber } = data
-
-  const onPhoneNumberChange = (event) =>
-    setData({ ...data, phoneNumber: event.target.value })
+  const { data, onChange } = useInput({
+    phoneNumber: '',
+  }, 'WEB_SAMPLE_CALL_UNIT_DATA')
 
   return (
     <>
       <input
         placeholder="고객 전화번호"
         className={InputStyles.PRELINE_BASIC}
-        value={phoneNumber}
-        onChange={(event) => onPhoneNumberChange(event)}
+        name="phoneNumber"
+        value={data.phoneNumber}
+        onChange={onChange}
       ></input>
 
-      {/* Hook Off */}
       <div
         className={`
           w-full ${
-            String(callState) === CallState.CONNECTED ||
-            String(callState) === CallState.OUTBOUND
-              ? 'hidden'
-              : ''
-          }`}
+          callState === CallState.CONNECTED ||
+          callState === CallState.OUTBOUND
+            ? 'hidden'
+            : ''
+        }`}
       >
-        {String(bellState) === BellState.RINGING ? (
+        {bellState === BellState.RINGING ? (
           <button
             className={ButtonStyles.PRELINE_SOLID + 'w-full'}
             onClick={() => setHookMode(3)}
@@ -57,16 +44,15 @@ const CallUnit = ({ ocx }) => {
         ) : (
           <button
             className={ButtonStyles.PRELINE_SOLID + 'w-full'}
-            onClick={() => setDialStr(phoneNumber)}
+            onClick={() => setDialStr(data.phoneNumber)}
           >
             <Call sx={{ width: '20px', height: '20px' }} /> 전화 걸기
           </button>
         )}
       </div>
 
-      {/* Hook On */}
-      <div className={String(callState) === CallState.IDLE ? 'hidden' : ''}>
-        {String(bellState) === BellState.RINGING ? (
+      <div className={callState === CallState.IDLE ? 'hidden' : ''}>
+        {bellState === BellState.RINGING ? (
           <button
             className={ButtonStyles.PRELINE_SOFT + 'w-full'}
             onClick={() => setHookMode(1)}

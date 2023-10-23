@@ -7,9 +7,9 @@ import { More } from '@mui/icons-material'
 const ExtraUnit = ({ ocx }) => {
   const { setExtra } = useOcxMethods(ocx)
 
-  const { data, onChange } = useInput('WEB_SAMPLE_EXTRA_UNIT_DATA', {
+  const { data, onChange } = useInput({
     payload: '',
-  })
+  }, 'WEB_SAMPLE_EXTRA_UNIT_DATA')
 
   return (
     <>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import useLocalStorage from '@/hooks/useLocalStorage'
 
-const useInput = (localStorageKey, defaultValues) => {
+const useInput = (defaultValues, localStorageKey) => {
   const { getLocalStorageData, setLocalStorageData } = useLocalStorage()
 
   const [data, setData] = useState(() => {
@@ -11,14 +11,17 @@ const useInput = (localStorageKey, defaultValues) => {
 
   useEffect(() => {
     setLocalStorageData(localStorageKey, data)
+
+    // console.log(data)
   }, [data])
 
   const onChange = (event) => {
     const { name, value } = event.target
+
     setData((prevData) => ({ ...prevData, [name]: value }))
   }
 
-  return { data, setData, onChange }
+  return { data, onChange }
 }
 
 export default useInput

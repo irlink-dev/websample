@@ -1,4 +1,4 @@
-import { DndState } from '@/types/OcxState'
+import { DndState } from '@/enums/OcxState'
 import { ButtonStyles } from '@/enums/styles/ButtonStyles'
 import { useContext } from 'react'
 import { OcxStateContext } from '@/contexts/OcxStateContext'
@@ -11,7 +11,7 @@ const DndUnit = ({ ocx }) => {
 
   return (
     <>
-      {String(dndState) === DndState.DND_ON ? (
+      {dndState === DndState.DND_ON ? (
         <button
           className={ButtonStyles.PRELINE_SOLID}
           onClick={() => setDnd(0)}

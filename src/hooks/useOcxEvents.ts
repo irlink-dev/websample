@@ -1,13 +1,4 @@
-import {
-  BellState,
-  CallState,
-  MuteState,
-  toBellState,
-  toCallActiveState,
-  toCreateDeviceState,
-  toDndState,
-  toMuteState,
-} from '@/types/OcxState'
+import { BellState, CallActiveState, CallState, CreateDeviceState, DndState, MuteState } from '@/enums/OcxState'
 
 const useOcxEvents = (ocx: any, ocxStateContext: any) => {
   const {
@@ -22,12 +13,7 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
    * 중계서버 연결, 연결 해제.
    */
   ocx.DevConnect = (nConnFlag: number) => {
-    console.log(
-      `[DevConnect] nConnFlag: ${nConnFlag} (${toCreateDeviceState(
-        String(nConnFlag),
-      )})`,
-    )
-
+    console.log(`✳️ [DevConnect] nConnFlag: ${nConnFlag} (${CreateDeviceState[nConnFlag]})`)
     setCreateDeviceState(() => nConnFlag)
   }
 
@@ -35,15 +21,14 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
    * 전화 걸기, 끊기.
    */
   ocx.DevHook = (nHookFlag: number) => {
-    console.log(`[DevHook] nHookFlag: ${nHookFlag}`)
+    console.log(`✳️ [DevHook] nHookFlag: ${nHookFlag}`)
   }
 
   /**
    * 아웃바운드 시.
    */
   ocx.DevOutGoing = (szPhoneNum: string) => {
-    console.log(`[DevOutGoing] szPhoneNum: ${szPhoneNum}`)
-
+    console.log(`✳️ [DevOutGoing] szPhoneNum: ${szPhoneNum}`)
     setCallState(() => CallState.OUTBOUND)
   }
 
@@ -51,15 +36,14 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
    * 콜 시작.
    */
   ocx.DevCallStart = (szCallInfo: string) => {
-    console.log(`[DevCallStart] szCallInfo: ${szCallInfo}`)
+    console.log(`✳️ [DevCallStart] szCallInfo: ${szCallInfo}`)
   }
 
   /**
    * 콜 연결.
    */
   ocx.DevCallConnected = (szCallInfo: string) => {
-    console.log(`[DevCallConnected] szCallInfo: ${szCallInfo}`)
-
+    console.log(`✳️ [DevCallConnected] szCallInfo: ${szCallInfo}`)
     setCallState(() => CallState.CONNECTED)
   }
 
@@ -67,8 +51,7 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
    * 콜 종료.
    */
   ocx.DevCallEnd = (szCallInfo: string) => {
-    console.log(`[DevCallEnd] szCallInfo: ${szCallInfo}`)
-
+    console.log(`✳️ [DevCallEnd] szCallInfo: ${szCallInfo}`)
     setCallState(() => CallState.IDLE)
   }
 
@@ -81,14 +64,13 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
     szCallInfo: string,
   ) => {
     console.log(
-      `[DevRecStartEnd] nFlag: ${nFlag}, szFileName: ${szFileName}, szCallInfo: ${szCallInfo}`,
+      `✳️ [DevRecStartEnd] nFlag: ${nFlag}, szFileName: ${szFileName}, szCallInfo: ${szCallInfo}`,
     )
-
     if (nFlag === 1) {
-      console.log(`[DevRecStartEnd] 녹취 시작.`)
+      console.log(`✳️ [DevRecStartEnd] 녹취 시작.`)
       setMuteState(() => MuteState.MIC_ON)
     } else {
-      console.log(`[DevRecStartEnd] 녹취 종료.`)
+      console.log(`✳️ [DevRecStartEnd] 녹취 종료.`)
     }
   }
 
@@ -97,9 +79,7 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
    */
   ocx.DevCallState = (nResult: number) => {
     console.log(
-      `[DevCallState] nResult: ${nResult} (${toCallActiveState(
-        String(nResult),
-      )})`,
+      `✳️ [DevCallState] nResult: ${nResult} (${CallActiveState[nResult]})`,
     )
   }
 
@@ -107,7 +87,7 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
    * 인바운드 시 상대 정보.
    */
   ocx.DevCidData = (szPhoneNum: string) => {
-    console.log(`[DevCidData] szPhoneNum: ${szPhoneNum}`)
+    console.log(`✳️ [DevCidData] szPhoneNum: ${szPhoneNum}`)
   }
 
   /**
@@ -120,7 +100,7 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
     nSort: string,
   ) => {
     console.log(
-      `[DevSavePath] nMode: ${nMode}, szUrl: ${szUrl}, szPath: ${szPath}, nSort: ${nSort}`,
+      `✳️ [DevSavePath] nMode: ${nMode}, szUrl: ${szUrl}, szPath: ${szPath}, nSort: ${nSort}`,
     )
   }
 
@@ -133,7 +113,7 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
     szType: any,
   ) => {
     console.log(
-      `[DevRecordFileName] nResult: ${nResult}, szFileName: ${szFileName}, szType: ${szType}`,
+      `✳️ [DevRecordFileName] nResult: ${nResult}, szFileName: ${szFileName}, szType: ${szType}`,
     )
   }
 
@@ -146,7 +126,7 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
     serverFileName: string,
   ) => {
     console.log(
-      `[DevUploaded] nResult: ${nResult}, localFileName: ${localFileName}, serverFileName: ${serverFileName}`,
+      `✳️ [DevUploaded] nResult: ${nResult}, localFileName: ${localFileName}, serverFileName: ${serverFileName}`,
     )
   }
 
@@ -162,7 +142,7 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
     image: any,
   ) => {
     console.log(
-      `[DevSMS] szState: ${szState}, otherNumber: ${otherNumber}, content: ${content}, type: ${type}, time: ${time}, image: ${image}`,
+      `✳️ [DevSMS] szState: ${szState}, otherNumber: ${otherNumber}, content: ${content}, type: ${type}, time: ${time}, image: ${image}`,
     )
   }
 
@@ -170,40 +150,37 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
    * 볼륨 변경.
    */
   ocx.DevVolume = (volume: number) => {
-    console.log(`[DevVolume] volume: ${volume}`)
+    console.log(`✳️ [DevVolume] volume: ${volume}`)
   }
 
   /**
    * 최대 볼륨 확인.
    */
   ocx.DevMaxVolume = (volume: number) => {
-    console.log(`[DevMaxVolume] volume: ${volume}`)
+    console.log(`✳️ [DevMaxVolume] volume: ${volume}`)
   }
 
   /**
    * 배터리 정보.
    */
   ocx.DevBatteryInfo = (level: string) => {
-    console.log(`[DevBatteryInfo] level: ${level}`)
+    console.log(`✳️ [DevBatteryInfo] level: ${level}`)
   }
 
   /**
    * 녹취 에러.
    */
   ocx.DevError = (nErrCode: number) => {
-    console.log(`[DevError] nErrCode: ${nErrCode}`)
+    console.log(`✳️ [DevError] nErrCode: ${nErrCode}`)
   }
 
   /**
    * 인바운드 시.
    */
   ocx.DevBell = (szState: number) => {
-    console.log(
-      `[DevBell] szState: ${szState} (${toBellState(String(szState))})`,
-    )
-
+    console.log(`✳️ [DevBell] szState: ${szState} (${BellState[szState]})`)
     setBellState(() => szState)
-    if (String(szState) === BellState.RINGING) {
+    if (szState === BellState.RINGING) {
       setCallState(() => CallState.INBOUND)
     }
   }
@@ -212,17 +189,14 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
    * 통화 가능 여부 확인.
    */
   ocx.DevAvailableCall = (szState: number) => {
-    console.log(`[DevAvailableCall] szState: ${szState}`)
+    console.log(`✳️ [DevAvailableCall] szState: ${szState}`)
   }
 
   /**
    * 마이크 음소거.
    */
   ocx.DevMute = (szState: number) => {
-    console.log(
-      `[DevMute] szState: ${szState} (${toMuteState(String(szState))})`,
-    )
-
+    console.log(`✳️ [DevMute] szState: ${szState} (${MuteState[szState]})`)
     setMuteState(() => szState)
   }
 
@@ -230,14 +204,14 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
    * 디바이스 선택.
    */
   ocx.DevSelectDevice = (szState: number, message: any) => {
-    console.log(`[DevSelectDevice] szState: ${szState}, message: ${message}`)
+    console.log(`✳️ [DevSelectDevice] szState: ${szState}, message: ${message}`)
   }
 
   /**
    * 지박스 연결 상태.
    */
   ocx.DevZiBoxConnect = (szState: number) => {
-    console.log(`[DevZiBoxConnect] szState: ${szState}`)
+    console.log(`✳️ [DevZiBoxConnect] szState: ${szState}`)
   }
 
   /**
@@ -253,7 +227,7 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
     image: any,
   ) => {
     console.log(
-      `[DevMessageExt] szState: ${szState}, otherNumber: ${otherNumber}, content: ${content}, type: ${type}, time: ${time}, image: ${image}`,
+      `✳️ [DevMessageExt] szState: ${szState}, otherNumber: ${otherNumber}, content: ${content}, type: ${type}, time: ${time}, image: ${image}`,
     )
   }
 
@@ -261,7 +235,7 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
    * 녹취 파일 리스트.
    */
   ocx.DevFileList = (szFileList: string) => {
-    console.log(`[DevFileList] szFileList: ${szFileList}`)
+    console.log(`✳️ [DevFileList] szFileList: ${szFileList}`)
   }
 
   /**
@@ -269,7 +243,7 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
    */
   ocx.DevRecPartial = (nStartEnd: any, szFileName: string, nResult: number) => {
     console.log(
-      `[DevRecPartial] nStartEnd: ${nStartEnd}, szFileName: ${szFileName}, nResult: ${nResult}`,
+      `✳️ [DevRecPartial] nStartEnd: ${nStartEnd}, szFileName: ${szFileName}, nResult: ${nResult}`,
     )
   }
 
@@ -278,7 +252,7 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
    */
   ocx.DevPauseRecording = (szFileName: string, szCallInfo: string) => {
     console.log(
-      `[DevPauseRecording] szFileName: ${szFileName}, szCallInfo: ${szCallInfo}`,
+      `✳️ [DevPauseRecording] szFileName: ${szFileName}, szCallInfo: ${szCallInfo}`,
     )
   }
 
@@ -287,7 +261,7 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
    */
   ocx.DevResumeRecording = (szFileName: string, szCallInfo: string) => {
     console.log(
-      `[DevResumeRecording] szFileName: ${szFileName}, szCallInfo: ${szCallInfo}`,
+      `✳️ [DevResumeRecording] szFileName: ${szFileName}, szCallInfo: ${szCallInfo}`,
     )
   }
 
@@ -295,7 +269,7 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
    * 배터리 충전 중 여부.
    */
   ocx.DevBatteryState = (state: number) => {
-    console.log(`[DevBatteryState] state: ${state}`)
+    console.log(`✳️ [DevBatteryState] state: ${state}`)
   }
 
   /**
@@ -309,15 +283,14 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
     dayMaxCount: number,
     monthMaxCount: number,
   ) => {
-    console.log(`[DevMessageCount] `)
+    console.log(`✳️ [DevMessageCount] `)
   }
 
   /**
    * DND 상태.
    */
   ocx.DevDnd = (code: number) => {
-    console.log(`[DevDnd] code: ${code} (${toDndState(String(code))})`)
-
+    console.log(`✳️ [DevDnd] code: ${code} (${DndState[code]})`)
     setDndState(() => code)
   }
 
@@ -326,7 +299,3 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
 
 export default useOcxEvents
 
-/**
- * @todo console.log 상 Method, Event Emoji 구분하여 모두 기록.
- * @todo toXXXState 함수 deprecate. enum 활용.
- */

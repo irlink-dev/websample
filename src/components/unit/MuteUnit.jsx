@@ -1,4 +1,4 @@
-import { MuteState } from '@/types/OcxState'
+import { MuteState } from '@/enums/OcxState'
 import useOcxMethods from '@/hooks/useOcxMethods'
 import { OcxStateContext } from '@/contexts/OcxStateContext'
 import { useContext } from 'react'
@@ -11,7 +11,7 @@ const MuteUnit = ({ ocx }) => {
 
   return (
     <>
-      {String(muteState) === MuteState.MIC_ON ? (
+      {muteState === MuteState.MIC_ON ? (
         <button
           className={ButtonStyles.PRELINE_SOFT}
           onClick={() => setMicMute(Number(MuteState.MIC_OFF))}

@@ -1,14 +1,14 @@
 import useOcxMethods from '@/hooks/useOcxMethods'
 import { useContext } from 'react'
 import { OcxStateContext } from '@/contexts/OcxStateContext'
-import { CreateDeviceState } from '@/types/OcxState'
+import { CreateDeviceState } from '@/enums/OcxState'
 import { ButtonStyles } from '@/enums/styles/ButtonStyles'
 
 const WindowUnit = ({ ocx }) => {
   const { setUserInput } = useOcxMethods(ocx)
   const { createDeviceState } = useContext(OcxStateContext)
 
-  const IS_PAIRED = String(createDeviceState) === CreateDeviceState.PAIRED
+  const IS_PAIRED = createDeviceState === CreateDeviceState.PAIRED
 
   return (
     <div className="w-full">

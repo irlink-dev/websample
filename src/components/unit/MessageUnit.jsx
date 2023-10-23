@@ -7,11 +7,11 @@ import { AllInbox, Message } from '@mui/icons-material'
 const MessageUnit = ({ ocx }) => {
   const { sendMessageExt, getMessageCount } = useOcxMethods(ocx)
 
-  const { data, onChange } = useInput('WEB_SAMPLE_MESSAGE_UNIT_DATA', {
+  const { data, onChange } = useInput({
     remoteNumbers: '',
     content: '',
     parts: '',
-  })
+  }, 'WEB_SAMPLE_MESSAGE_UNIT_DATA')
 
   return (
     <>

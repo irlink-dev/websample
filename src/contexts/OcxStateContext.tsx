@@ -12,7 +12,7 @@ import {
   DndStateType,
   MuteState,
   MuteStateType,
-} from '@/types/OcxState'
+} from '@/enums/OcxState'
 
 export const OcxStateContext = React.createContext({
   /**
