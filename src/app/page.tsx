@@ -28,6 +28,7 @@ declare global {
 const RootPage = () => {
   const [ocx, setOcx] = useState<any>(null)
   const ocxStateContext = useContext(OcxStateContext)
+  const packageJson = require('/package.json')
 
   useEffect(() => {
     const _ocx = new window.IRWebSocketClient()
@@ -119,6 +120,9 @@ const RootPage = () => {
               <span className="text-sm text-[#777777]">
                 Socket.io Client v2
               </span>
+              <strong className="text-sm text-[#777777]">
+                IRLINK WEB SAMPLE v{packageJson.version}
+              </strong>
             </div>
           </section>
 
