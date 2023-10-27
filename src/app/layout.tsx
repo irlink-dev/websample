@@ -14,7 +14,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <script src="https://cdn.tailwindcss.com"></script>
       </head>
       <OcxStateProvider>
-        <body>{children}</body>
+        <body className="max-w-[400px] mx-auto">{children}</body>
       </OcxStateProvider>
     </html>
   )

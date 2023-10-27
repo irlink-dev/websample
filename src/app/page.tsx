@@ -45,7 +45,7 @@ const RootPage = () => {
       {/** Connection & Window Panel */}
       <section className="w-full p-5 border-b-2 border-[#eeeeee]">
         <div className="max-w-screen-lg mx-auto flex flex-col items-center justify-between md:flex-row">
-          <h1 className="text-lg font-medium hidden md:block text-[#333333]">
+          <h1 className="text-lg font-medium hidden text-[#333333]">
             WEB SAMPLE
           </h1>
 
