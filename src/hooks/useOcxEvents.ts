@@ -1,4 +1,11 @@
-import { BellState, CallActiveState, CallState, CreateDeviceState, DndState, MuteState } from '@/enums/OcxState'
+import {
+  BellState,
+  CallActiveState,
+  CallState,
+  CreateDeviceState,
+  DndState,
+  MuteState,
+} from '@/enums/OcxState'
 
 const useOcxEvents = (ocx: any, ocxStateContext: any) => {
   const {
@@ -13,7 +20,9 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
    * 중계서버 연결, 연결 해제.
    */
   ocx.DevConnect = (nConnFlag: number) => {
-    console.log(`✳️ [DevConnect] nConnFlag: ${nConnFlag} (${CreateDeviceState[nConnFlag]})`)
+    console.log(
+      `✳️ [DevConnect] nConnFlag: ${nConnFlag} (${CreateDeviceState[nConnFlag]})`,
+    )
     setCreateDeviceState(() => nConnFlag)
   }
 
@@ -298,4 +307,3 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
 }
 
 export default useOcxEvents
-
