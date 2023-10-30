@@ -4,8 +4,10 @@ import { OcxStateContext } from '@/contexts/OcxStateContext'
 import { useContext } from 'react'
 import { Mic, MicOff } from '@mui/icons-material'
 import { ButtonStyles } from '@/enums/styles/ButtonStyles'
+import { useOcx } from '@/hooks/useOcx'
 
-const MuteUnit = ({ ocx }) => {
+const MuteUnit = () => {
+  const { ocx } = useOcx()
   const { muteState } = useContext(OcxStateContext)
   const { setMicMute } = useOcxMethods(ocx)
 

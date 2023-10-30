@@ -1,7 +1,9 @@
 import useOcxMethods from '@/hooks/useOcxMethods'
 import { ButtonStyles } from '@/enums/styles/ButtonStyles'
+import { useOcx } from '@/hooks/useOcx'
 
-const CallStateUnit = ({ ocx }) => {
+const CallStateUnit = () => {
+  const { ocx } = useOcx()
   const { getCallState } = useOcxMethods(ocx)
 
   return (

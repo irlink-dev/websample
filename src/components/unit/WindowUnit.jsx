@@ -3,10 +3,12 @@ import { useContext } from 'react'
 import { OcxStateContext } from '@/contexts/OcxStateContext'
 import { CreateDeviceState } from '@/enums/OcxState'
 import { ButtonStyles } from '@/enums/styles/ButtonStyles'
+import { useOcx } from '@/hooks/useOcx'
 
-const WindowUnit = ({ ocx }) => {
-  const { setUserInput } = useOcxMethods(ocx)
+const WindowUnit = () => {
+  const { ocx } = useOcx()
   const { createDeviceState } = useContext(OcxStateContext)
+  const { setUserInput } = useOcxMethods(ocx)
 
   const IS_PAIRED = createDeviceState === CreateDeviceState.PAIRED
 

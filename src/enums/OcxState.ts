@@ -1,4 +1,3 @@
-
 /**
  * 디바이스 연결 상태.
  */
@@ -56,12 +55,13 @@ export enum DndState {
   DND_ON = 1,
 }
 
-
-export type CreateDeviceStateType = (typeof CreateDeviceState)[keyof typeof CreateDeviceState]
+export type CreateDeviceStateType =
+  (typeof CreateDeviceState)[keyof typeof CreateDeviceState]
 
 export type CallStateType = (typeof CallState)[keyof typeof CallState]
 
-export type CallActiveStateType = (typeof CallActiveState)[keyof typeof CallActiveState]
+export type CallActiveStateType =
+  (typeof CallActiveState)[keyof typeof CallActiveState]
 
 export type BellStateType = (typeof BellState)[keyof typeof BellState]
 

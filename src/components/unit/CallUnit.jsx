@@ -6,14 +6,19 @@ import { Call, CallEnd, PhoneCallback } from '@mui/icons-material'
 import { useContext } from 'react'
 import { InputStyles } from '@/enums/styles/InputStyles'
 import useInput from '@/hooks/useInput'
+import { useOcx } from '@/hooks/useOcx'
 
-const CallUnit = ({ ocx }) => {
+const CallUnit = () => {
+  const { ocx } = useOcx()
   const { callState, bellState } = useContext(OcxStateContext)
   const { setDialStr, setHookMode } = useOcxMethods(ocx)
 
-  const { data, onChange } = useInput({
-    phoneNumber: '',
-  }, 'WEB_SAMPLE_CALL_UNIT_DATA')
+  const { data, onChange } = useInput(
+    {
+      phoneNumber: '',
+    },
+    'WEB_SAMPLE_CALL_UNIT_DATA',
+  )
 
   return (
     <>
@@ -28,11 +33,11 @@ const CallUnit = ({ ocx }) => {
       <div
         className={`
           w-full ${
-          callState === CallState.CONNECTED ||
-          callState === CallState.OUTBOUND
-            ? 'hidden'
-            : ''
-        }`}
+            callState === CallState.CONNECTED ||
+            callState === CallState.OUTBOUND
+              ? 'hidden'
+              : ''
+          }`}
       >
         {bellState === BellState.RINGING ? (
           <button

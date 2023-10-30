@@ -1,7 +1,9 @@
 import { ButtonStyles } from '@/enums/styles/ButtonStyles'
 import useOcxMethods from '@/hooks/useOcxMethods'
+import { useOcx } from '@/hooks/useOcx'
 
-const DeviceUnit = ({ ocx }) => {
+const DeviceUnit = () => {
+  const { ocx } = useOcx()
   const { setSelectDevice } = useOcxMethods(ocx)
 
   return (

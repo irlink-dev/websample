@@ -3,15 +3,20 @@ import { ButtonStyles } from '@/enums/styles/ButtonStyles'
 import useOcxMethods from '@/hooks/useOcxMethods'
 import useInput from '@/hooks/useInput'
 import { AllInbox, Message } from '@mui/icons-material'
+import { useOcx } from '@/hooks/useOcx'
 
-const MessageUnit = ({ ocx }) => {
+const MessageUnit = () => {
+  const { ocx } = useOcx()
   const { sendMessageExt, getMessageCount } = useOcxMethods(ocx)
 
-  const { data, onChange } = useInput({
-    remoteNumbers: '',
-    content: '',
-    parts: '',
-  }, 'WEB_SAMPLE_MESSAGE_UNIT_DATA')
+  const { data, onChange } = useInput(
+    {
+      remoteNumbers: '',
+      content: '',
+      parts: '',
+    },
+    'WEB_SAMPLE_MESSAGE_UNIT_DATA',
+  )
 
   return (
     <>

@@ -2,13 +2,18 @@ import useOcxMethods from 'src/hooks/useOcxMethods'
 import { ButtonStyles } from 'src/enums/styles/ButtonStyles'
 import { InputStyles } from 'src/enums/styles/InputStyles'
 import useInput from '@/hooks/useInput'
+import { useOcx } from '@/hooks/useOcx'
 
-const UploadPathUnit = ({ ocx }) => {
+const UploadPathUnit = () => {
+  const { ocx } = useOcx()
   const { setSavePath, getSavePath } = useOcxMethods(ocx)
 
-  const { data, onChange } = useInput({
-    uploadUrl: ''
-  }, 'WEB_SAMPLE_UPLOAD_PATH_DATA')
+  const { data, onChange } = useInput(
+    {
+      uploadUrl: '',
+    },
+    'WEB_SAMPLE_UPLOAD_PATH_DATA',
+  )
 
   return (
     <section className="p-5">
@@ -16,7 +21,7 @@ const UploadPathUnit = ({ ocx }) => {
         <input
           placeholder="서버 URL"
           className={InputStyles.PRELINE_BASIC}
-          name='uploadUrl'
+          name="uploadUrl"
           value={data.uploadUrl}
           onChange={onChange}
         ></input>

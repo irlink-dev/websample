@@ -3,13 +3,18 @@ import { InputStyles } from '@/enums/styles/InputStyles'
 import useInput from '@/hooks/useInput'
 import useOcxMethods from '@/hooks/useOcxMethods'
 import { More } from '@mui/icons-material'
+import { useOcx } from '@/hooks/useOcx'
 
-const ExtraUnit = ({ ocx }) => {
+const ExtraUnit = () => {
+  const { ocx } = useOcx()
   const { setExtra } = useOcxMethods(ocx)
 
-  const { data, onChange } = useInput({
-    payload: '',
-  }, 'WEB_SAMPLE_EXTRA_UNIT_DATA')
+  const { data, onChange } = useInput(
+    {
+      payload: '',
+    },
+    'WEB_SAMPLE_EXTRA_UNIT_DATA',
+  )
 
   return (
     <>

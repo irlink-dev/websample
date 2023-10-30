@@ -5,15 +5,20 @@ import { CreateDeviceState } from '@/enums/OcxState'
 import { ButtonStyles } from '@/enums/styles/ButtonStyles'
 import { InputStyles } from '@/enums/styles/InputStyles'
 import useInput from '@/hooks/useInput'
+import { useOcx } from '@/hooks/useOcx'
 
-const ConnectionUnit = ({ ocx }) => {
+const ConnectionUnit = () => {
+  const { ocx } = useOcx()
   const { createDeviceState } = useContext(OcxStateContext)
   const { createDevice, closeDevice } = useOcxMethods(ocx)
 
-  const { data, onChange } = useInput({
-    serverUrl: '',
-    phoneNumber: '',
-  }, 'WEB_SAMPLE_CONNECTION_UNIT_DATA')
+  const { data, onChange } = useInput(
+    {
+      serverUrl: '',
+      phoneNumber: '',
+    },
+    'WEB_SAMPLE_CONNECTION_UNIT_DATA',
+  )
 
   const IS_PAIRED = createDeviceState === CreateDeviceState.PAIRED
   const INPUT_STYLE =
@@ -21,6 +26,10 @@ const ConnectionUnit = ({ ocx }) => {
 
   return (
     <div className="flex flex-col gap-2 w-full">
+      <button onClick={() => console.log(createDeviceState)}>
+        테스트 버튼
+      </button>
+
       <input
         placeholder="서버 URL"
         value={data.serverUrl}

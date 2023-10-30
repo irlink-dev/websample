@@ -1,8 +1,10 @@
 import useOcxMethods from '@/hooks/useOcxMethods'
 import { FiberManualRecord, Pause, PlayArrow, Stop } from '@mui/icons-material'
 import { ButtonStyles } from '@/enums/styles/ButtonStyles'
+import { useOcx } from '@/hooks/useOcx'
 
-const RecordUnit = ({ ocx }) => {
+const RecordUnit = () => {
+  const { ocx } = useOcx()
   const { setRecPartial, pauseRecording, resumeRecording } = useOcxMethods(ocx)
 
   return (

@@ -3,16 +3,21 @@ import { InputStyles } from '@/enums/styles/InputStyles'
 import { ButtonStyles } from '@/enums/styles/ButtonStyles'
 import useInput from '@/hooks/useInput'
 import { Publish } from '@mui/icons-material'
+import { useOcx } from '@/hooks/useOcx'
 
-const UploadUnit = ({ ocx }) => {
+const UploadUnit = () => {
+  const { ocx } = useOcx()
   const { setUploadFile, getFileList } = useOcxMethods(ocx)
 
-  const { data, onChange } = useInput({
-    localFileName: '',
-    serverFileName: '',
-    serverUrl: '',
-    fileSavePath: '',
-  }, 'WEB_SAMPLE_UPLOAD_UNIT_DATA')
+  const { data, onChange } = useInput(
+    {
+      localFileName: '',
+      serverFileName: '',
+      serverUrl: '',
+      fileSavePath: '',
+    },
+    'WEB_SAMPLE_UPLOAD_UNIT_DATA',
+  )
 
   return (
     <>

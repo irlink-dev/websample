@@ -1,8 +1,10 @@
 import useOcxMethods from '@/hooks/useOcxMethods'
 import { Battery80, BatteryCharging80 } from '@mui/icons-material'
 import { ButtonStyles } from '@/enums/styles/ButtonStyles'
+import { useOcx } from '@/hooks/useOcx'
 
-const BatteryUnit = ({ ocx }) => {
+const BatteryUnit = () => {
+  const { ocx } = useOcx()
   const { getBatteryInfo, getBatteryState } = useOcxMethods(ocx)
 
   return (

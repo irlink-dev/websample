@@ -1,4 +1,10 @@
-import * as React from 'react'
+import React, {
+  Dispatch,
+  SetStateAction,
+  createContext,
+  useEffect,
+  useState,
+} from 'react'
 import {
   BellState,
   BellStateType,
@@ -14,14 +20,14 @@ import {
   MuteStateType,
 } from '@/enums/OcxState'
 
-export const OcxStateContext = React.createContext({
+export const OcxStateContext = createContext({
   /**
    * 디바이스 연결 상태.
    */
   createDeviceState: CreateDeviceState.DISCONNECTED,
   setCreateDeviceState: ((state: CreateDeviceStateType) => {
     /* empty */
-  }) as React.Dispatch<React.SetStateAction<CreateDeviceStateType>>,
+  }) as Dispatch<SetStateAction<CreateDeviceStateType>>,
 
   /**
    * 콜 상태.
@@ -29,7 +35,7 @@ export const OcxStateContext = React.createContext({
   callState: CallState.IDLE,
   setCallState: ((state: CallStateType) => {
     /* empty */
-  }) as React.Dispatch<React.SetStateAction<CallStateType>>,
+  }) as Dispatch<SetStateAction<CallStateType>>,
 
   /**
    * 콜 활성화 상태.
@@ -37,7 +43,7 @@ export const OcxStateContext = React.createContext({
   callActiveState: CallActiveState.INACTIVE,
   setCallActiveState: ((state: CallActiveStateType) => {
     /* empty */
-  }) as React.Dispatch<React.SetStateAction<CallActiveStateType>>,
+  }) as Dispatch<SetStateAction<CallActiveStateType>>,
 
   /**
    * 벨 상태.
@@ -45,7 +51,7 @@ export const OcxStateContext = React.createContext({
   bellState: BellState.SILENT,
   setBellState: ((state: BellStateType) => {
     /* empty */
-  }) as React.Dispatch<React.SetStateAction<BellStateType>>,
+  }) as Dispatch<SetStateAction<BellStateType>>,
 
   /**
    * 음소거 상태.
@@ -53,7 +59,7 @@ export const OcxStateContext = React.createContext({
   muteState: MuteState.MIC_ON,
   setMuteState: ((state: MuteStateType) => {
     /* empty */
-  }) as React.Dispatch<React.SetStateAction<MuteStateType>>,
+  }) as Dispatch<SetStateAction<MuteStateType>>,
 
   /**
    * 착신 거부 상태.
@@ -61,7 +67,7 @@ export const OcxStateContext = React.createContext({
   dndState: DndState.DND_OFF,
   setDndState: ((state: DndStateType) => {
     /* empty */
-  }) as React.Dispatch<React.SetStateAction<DndStateType>>,
+  }) as Dispatch<SetStateAction<DndStateType>>,
 })
 
 export const OcxStateProvider = ({
@@ -70,24 +76,23 @@ export const OcxStateProvider = ({
   children: React.ReactNode
 }) => {
   const [createDeviceState, setCreateDeviceState] =
-    React.useState<CreateDeviceStateType>(CreateDeviceState.DISCONNECTED)
+    useState<CreateDeviceStateType>(CreateDeviceState.DISCONNECTED)
 
-  const [callState, setCallState] = React.useState<CallStateType>(
-    CallState.IDLE,
+  const [callState, setCallState] = useState<CallStateType>(CallState.IDLE)
+
+  const [callActiveState, setCallActiveState] = useState<CallActiveStateType>(
+    CallActiveState.INACTIVE,
   )
 
-  const [callActiveState, setCallActiveState] =
-    React.useState<CallActiveStateType>(CallActiveState.INACTIVE)
+  const [bellState, setBellState] = useState<BellStateType>(BellState.SILENT)
 
-  const [bellState, setBellState] = React.useState<BellStateType>(
-    BellState.SILENT,
-  )
+  const [muteState, setMuteState] = useState<MuteStateType>(MuteState.MIC_ON)
 
-  const [muteState, setMuteState] = React.useState<MuteStateType>(
-    MuteState.MIC_ON,
-  )
+  const [dndState, setDndState] = useState<DndStateType>(DndState.DND_OFF)
 
-  const [dndState, setDndState] = React.useState<DndStateType>(DndState.DND_OFF)
+  useEffect(() => {
+    console.log('createDeviceState:', createDeviceState)
+  }, [createDeviceState])
 
   return (
     <OcxStateContext.Provider

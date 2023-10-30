@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import { OcxProvider } from '@/contexts/OcxContext'
 import { OcxStateProvider } from '@/contexts/OcxStateContext'
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
@@ -13,9 +14,11 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <script src="/libs/IRWebSocketClient.js"></script>
         <script src="https://cdn.tailwindcss.com"></script>
       </head>
-      <OcxStateProvider>
-        <body className="max-w-[400px] mx-auto">{children}</body>
-      </OcxStateProvider>
+      <OcxProvider>
+        <OcxStateProvider>
+          <body>{children}</body>
+        </OcxStateProvider>
+      </OcxProvider>
     </html>
   )
 }

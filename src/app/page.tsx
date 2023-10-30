@@ -26,15 +26,7 @@ declare global {
 }
 
 const RootPage = () => {
-  const [ocx, setOcx] = useState<any>(null)
-  const ocxStateContext = useContext(OcxStateContext)
   const packageJson = require('/package.json')
-
-  useEffect(() => {
-    const _ocx = new window.IRWebSocketClient()
-    const { ocx } = useOcxEvents(_ocx, ocxStateContext)
-    setOcx(() => ocx)
-  }, [])
 
   return (
     <>
@@ -45,73 +37,67 @@ const RootPage = () => {
 
       {/** Connection & Window Panel */}
       <section className="w-full p-5 border-b-2 border-[#eeeeee]">
-        <div className="max-w-screen-lg mx-auto flex flex-col items-center justify-between md:flex-row">
-          <h1 className="text-lg font-medium hidden text-[#333333]">
-            WEB SAMPLE
-          </h1>
-
-          <div className="w-full flex flex-col items-center gap-2">
-            <ConnectionUnit ocx={ocx} />
-            <WindowUnit ocx={ocx} />
-          </div>
+        <div className="w-full flex flex-col items-center gap-2">
+          <ConnectionUnit />
+          <WindowUnit />
         </div>
       </section>
 
       {/** Main Contents */}
       <main className="bg-[#fafafa]">
-        <UploadPathUnit ocx={ocx} />
+        <UploadPathUnit />
 
         <div className="flex flex-col gap-2">
           <section className="border-y-2 border-[#eeeeee]">
             <div className="w-full flex flex-col gap-2 p-5 bg-white">
-              <CallUnit ocx={ocx} />
+              <CallUnit />
             </div>
           </section>
 
           <section className="border-y-2 border-[#eeeeee]">
             <div className="w-full grid grid-cols-2 gap-2 p-5 bg-white">
-              <DndUnit ocx={ocx} />
-              <MuteUnit ocx={ocx} />
+              <DndUnit />
+              <MuteUnit />
             </div>
           </section>
 
           <section className="">
             <div className="w-full flex flex-col gap-2 p-5">
-              <CallStateUnit ocx={ocx} />
-              <VolumeUnit ocx={ocx} />
+              <CallStateUnit />
+              <VolumeUnit />
             </div>
           </section>
 
           <section className="border-y-2 border-[#eeeeee]">
             <div className="w-full flex flex-col gap-2 p-5 bg-white">
-              <UploadUnit ocx={ocx} />
+              <UploadUnit />
             </div>
           </section>
 
           <section className="">
             <div className="w-full grid grid-cols-2 gap-2 p-5">
-              <RecordUnit ocx={ocx} />
+              <RecordUnit />
             </div>
           </section>
 
           <section className="border-y-2 border-[#eeeeee]">
             <div className="w-full flex flex-col gap-2 p-5 bg-white">
-              <MessageUnit ocx={ocx} />
+              <MessageUnit />
             </div>
           </section>
 
           <section className="">
             <div className="w-full flex flex-col gap-2 p-5">
-              <BatteryUnit ocx={ocx} />
+              <BatteryUnit />
               <div className="grid grid-cols-2 gap-2">
-                <DeviceUnit ocx={ocx} />
+                <DeviceUnit />
               </div>
             </div>
           </section>
 
           <section className="border-y-2 border-[#eeeeee]">
             <div className="w-full flex flex-col gap-2 p-5 bg-white">
-              <ExtraUnit ocx={ocx} />
+              <ExtraUnit />
             </div>
           </section>
 

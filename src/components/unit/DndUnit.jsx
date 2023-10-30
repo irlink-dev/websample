@@ -4,8 +4,10 @@ import { useContext } from 'react'
 import { OcxStateContext } from '@/contexts/OcxStateContext'
 import { PhoneDisabled, PhoneEnabled } from '@mui/icons-material'
 import useOcxMethods from '@/hooks/useOcxMethods'
+import { useOcx } from '@/hooks/useOcx'
 
-const DndUnit = ({ ocx }) => {
+const DndUnit = () => {
+  const { ocx } = useOcx()
   const { dndState } = useContext(OcxStateContext)
   const { setDnd } = useOcxMethods(ocx)
 

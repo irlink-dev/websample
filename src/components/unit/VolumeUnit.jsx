@@ -1,7 +1,9 @@
 import useOcxMethods from '@/hooks/useOcxMethods'
 import { ButtonStyles } from '@/enums/styles/ButtonStyles'
+import { useOcx } from '@/hooks/useOcx'
 
-const VolumeUnit = ({ ocx }) => {
+const VolumeUnit = () => {
+  const { ocx } = useOcx()
   const { getVolume, getMaxVolume } = useOcxMethods(ocx)
 
   return (
