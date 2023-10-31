@@ -5,6 +5,7 @@ import React, {
   useEffect,
   useState,
 } from 'react'
+
 import {
   BellState,
   BellStateType,
@@ -89,10 +90,6 @@ export const OcxStateProvider = ({
   const [muteState, setMuteState] = useState<MuteStateType>(MuteState.MIC_ON)
 
   const [dndState, setDndState] = useState<DndStateType>(DndState.DND_OFF)
-
-  useEffect(() => {
-    console.log('createDeviceState:', createDeviceState)
-  }, [createDeviceState])
 
   return (
     <OcxStateContext.Provider
