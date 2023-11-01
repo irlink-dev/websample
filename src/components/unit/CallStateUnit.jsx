@@ -9,7 +9,7 @@ const CallStateUnit = () => {
   return (
     <>
       <button
-        className={ButtonStyles.PRELINE_OUTLINE}
+        className={ButtonStyles.PRELINE_OUTLINE + `h-full`}
         onClick={() => getCallState()}
       >
         GET_CALL_STATE

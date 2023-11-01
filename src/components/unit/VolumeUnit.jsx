@@ -9,14 +9,14 @@ const VolumeUnit = () => {
   return (
     <>
       <button
-        className={ButtonStyles.PRELINE_OUTLINE}
+        className={ButtonStyles.PRELINE_OUTLINE + `h-full`}
         onClick={() => getVolume()}
       >
         GET_VOLUME
       </button>
 
       <button
-        className={ButtonStyles.PRELINE_OUTLINE}
+        className={ButtonStyles.PRELINE_OUTLINE + `h-full`}
         onClick={() => getMaxVolume()}
       >
         GET_MAX_VOLUME

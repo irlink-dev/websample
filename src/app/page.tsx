@@ -133,18 +133,16 @@ const RootPage = () => {
             <ExtraUnit />
           </div>
         </section>
-
-        <section className={`px-5 sm:p-0`}>
-          <div className={`w-full h-full flex flex-col gap-2 py-5`}>
-            <span className={`text-sm text-[#777777]`}>
-              Socket.io Client v2
-            </span>
-            <strong className={`text-sm text-[#777777]`}>
-              IRLINK WEB SAMPLE v{packageJson.version}
-            </strong>
-          </div>
-        </section>
       </main>
+
+      <section className={`max-w-screen-lg mx-auto p-5 sm:pt-0`}>
+        <div className={`w-full h-full flex flex-col gap-2`}>
+          <span className={`text-sm text-[#777777]`}>Socket.io Client v2</span>
+          <strong className={`text-sm text-[#777777]`}>
+            IRLINK WEB SAMPLE v{packageJson.version}
+          </strong>
+        </div>
+      </section>
     </>
   )
 }
