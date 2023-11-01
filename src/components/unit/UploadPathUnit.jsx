@@ -16,15 +16,15 @@ const UploadPathUnit = () => {
   )
 
   return (
-    <section className="p-5">
-      <div className="ml-auto flex flex-col gap-2">
-        <input
-          placeholder="서버 URL"
-          className={InputStyles.PRELINE_BASIC}
-          name="uploadUrl"
-          value={data.uploadUrl}
-          onChange={onChange}
-        ></input>
+    <>
+      <input
+        placeholder="서버 URL"
+        className={InputStyles.PRELINE_BASIC}
+        name="uploadUrl"
+        value={data.uploadUrl}
+        onChange={onChange}
+      ></input>
+      <div className="flex flex-col gap-2 mt-auto">
         <button
           className={ButtonStyles.PRELINE_SOFT}
           onClick={() => {
@@ -40,7 +40,7 @@ const UploadPathUnit = () => {
           GET_SAVE_PATH
         </button>
       </div>
-    </section>
+    </>
   )
 }
 

@@ -20,7 +20,7 @@ const ExtraUnit = () => {
     <>
       <input
         placeholder="기타 정보"
-        className={InputStyles.PRELINE_BASIC}
+        className={InputStyles.PRELINE_BASIC + `h-full`}
         name="payload"
         value={data.payload}
         onChange={onChange}

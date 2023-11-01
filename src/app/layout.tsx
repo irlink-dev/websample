@@ -16,7 +16,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       </head>
       <OcxStateProvider>
         <OcxProvider>
-          <body>{children}</body>
+          <body className="bg-[#fafafa] ">{children}</body>
         </OcxProvider>
       </OcxStateProvider>
     </html>
