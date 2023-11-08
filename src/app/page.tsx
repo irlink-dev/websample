@@ -1,5 +1,6 @@
 'use client'
 
+import packageJson from '../../package.json'
 import Alert from '@/components/Alert'
 import UploadPathUnit from '@/components/unit/UploadPathUnit.jsx'
 import WindowUnit from '@/components/unit/WindowUnit'
@@ -24,8 +25,6 @@ declare global {
 }
 
 const RootPage = () => {
-  const packageJson = require('/package.json')
-
   return (
     <>
       <Alert>
@@ -148,3 +147,7 @@ const RootPage = () => {
 }
 
 export default RootPage
+
+/**
+ * connected ? '🟢 Connected' : '🔴 Disconnected'
+ */
