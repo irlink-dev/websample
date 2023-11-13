@@ -7,10 +7,12 @@ import { InputStyles } from '@/enums/styles/InputStyles'
 import useInput from '@/hooks/useInput'
 import { useOcx } from '@/hooks/useOcx'
 import useSocketMethods from '@/hooks/useSocketMethods'
+import { SettingsContext } from '@/contexts/SettingsContext'
 
 const ConnectionUnit = () => {
   const { ocx } = useOcx()
   const { createDeviceState } = useContext(OcxStateContext)
+  const { settings } = useContext(SettingsContext)
   const { createDevice, closeDevice } = useOcxMethods(ocx)
   const { emitCreateDevice, emitCloseDevice } = useSocketMethods()
 
@@ -25,8 +27,6 @@ const ConnectionUnit = () => {
   const IS_PAIRED = createDeviceState === CreateDeviceState.PAIRED
   const INPUT_STYLE =
     InputStyles.PRELINE_BASIC + `${IS_PAIRED && 'cursor-not-allowed'}`
-
-  const USE_SOCKET_METHOD = true
 
   return (
     <div className="flex flex-col gap-2 w-full">
@@ -52,7 +52,7 @@ const ConnectionUnit = () => {
           type="button"
           className={ButtonStyles.PRELINE_SOLID}
           onClick={() =>
-            USE_SOCKET_METHOD ? emitCloseDevice() : closeDevice()
+            settings.USE_ENGINE_IO_V3 ? emitCloseDevice() : closeDevice()
           }
         >
           CLOSE_DEVICE
@@ -62,7 +62,7 @@ const ConnectionUnit = () => {
           type="button"
           className={ButtonStyles.PRELINE_OUTLINE}
           onClick={() =>
-            USE_SOCKET_METHOD
+            settings.USE_ENGINE_IO_V3
               ? emitCreateDevice(data.serverUrl, data.phoneNumber)
               : createDevice(data.serverUrl, data.phoneNumber)
           }

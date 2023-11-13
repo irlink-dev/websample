@@ -2,6 +2,7 @@
 
 import packageJson from '../../package.json'
 import Alert from '@/components/Alert'
+import Switch from '@/components/Switch'
 import UploadPathUnit from '@/components/unit/UploadPathUnit.jsx'
 import WindowUnit from '@/components/unit/WindowUnit'
 import ConnectionUnit from '@/components/unit/ConnectionUnit'
@@ -17,6 +18,8 @@ import BatteryUnit from '@/components/unit/BatteryUnit'
 import DeviceUnit from '@/components/unit/DeviceUnit'
 import ExtraUnit from '@/components/unit/ExtraUnit'
 import { AnimationStyles } from '@/enums/styles/AnimationStyles'
+import { useContext } from 'react'
+import { SettingsContext } from '@/contexts/SettingsContext'
 
 declare global {
   interface Window {
@@ -25,11 +28,28 @@ declare global {
 }
 
 const RootPage = () => {
+  const { settings, setSettings } = useContext(SettingsContext)
+
   return (
     <>
       <Alert>
         법인폰을 사내 Wi-Fi에 연결하고, 웹에서 SSL 사설 인증서를 갱신해 주세요.
       </Alert>
+
+      <section
+        className={`max-w-screen-lg mx-auto pt-5`}
+        // grid grid-cols-1 sm:p-5 sm:gap-3 md:grid-cols-2
+      >
+        <div className="flex items-center justify-center gap-2">
+          <span>Use engine.io v3 (old version)</span>
+          <Switch
+            label="EIO v3"
+            onChange={(USE_ENGINE_IO_V3: boolean) => {
+              setSettings({ ...settings, USE_ENGINE_IO_V3 })
+            }}
+          />
+        </div>
+      </section>
 
       {/* lg:grid-cols-3 gap-x-4 */}
       <main
@@ -133,7 +153,6 @@ const RootPage = () => {
           </div>
         </section>
       </main>
-
       <section className={`max-w-screen-lg mx-auto p-5 sm:pt-0`}>
         <div className={`w-full h-full flex flex-col gap-2`}>
           <span className={`text-sm text-[#777777]`}>Socket.io Client v2</span>

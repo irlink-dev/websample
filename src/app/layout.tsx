@@ -3,6 +3,7 @@
 import * as React from 'react'
 import { OcxProvider } from '@/contexts/OcxContext'
 import { OcxStateProvider } from '@/contexts/OcxStateContext'
+import { SettingsProvider } from '@/contexts/SettingsContext'
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -14,11 +15,13 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <script src="/libs/IRWebSocketClient.js"></script>
         <script src="https://cdn.tailwindcss.com"></script>
       </head>
-      <OcxStateProvider>
-        <OcxProvider>
-          <body className="bg-[#fafafa] ">{children}</body>
-        </OcxProvider>
-      </OcxStateProvider>
+      <SettingsProvider>
+        <OcxStateProvider>
+          <OcxProvider>
+            <body className="bg-[#fafafa] ">{children}</body>
+          </OcxProvider>
+        </OcxStateProvider>
+      </SettingsProvider>
     </html>
   )
 }
