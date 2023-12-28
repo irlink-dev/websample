@@ -53,7 +53,7 @@ const RootPage = () => {
 
       {/* lg:grid-cols-3 gap-x-4 */}
       <main
-        className={`max-w-screen-lg mx-auto grid grid-cols-1 sm:p-5 sm:gap-3 md:grid-cols-2 `}
+        className={`max-w-screen-lg mx-auto grid grid-cols-1 sm:p-5 sm:gap-5 md:grid-cols-2 `}
       >
         <section
           className={`border-b-2 border-[#eeeeee] sm:border-none ${AnimationStyles.DEFAULT}`}

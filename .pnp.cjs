@@ -35,6 +35,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:20.3.1"],\
             ["@types/react", "npm:18.2.12"],\
             ["@types/react-dom", "npm:18.2.5"],\
+            ["core-js", "npm:3.34.0"],\
             ["flowbite", "npm:1.7.0"],\
             ["next", "virtual:358b4c7cb3abdcdfa4a95e1c25294b6a8d39f7ae0e15bf953b55959e34d8d42d7e2b0d4b0ff2f43d159b91ac4864866f99e9c5815c4bb96e7a75fc6f5fb5b0bf#npm:13.4.5"],\
             ["react", "npm:18.2.0"],\
@@ -940,6 +941,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["core-js", [\
+        ["npm:3.34.0", {\
+          "packageLocation": "./.yarn/unplugged/core-js-npm-3.34.0-8debcb197b/node_modules/core-js/",\
+          "packageDependencies": [\
+            ["core-js", "npm:3.34.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["cosmiconfig", [\
         ["npm:7.1.0", {\
           "packageLocation": "./.yarn/cache/cosmiconfig-npm-7.1.0-13a5090bcd-c53bf7befc.zip/node_modules/cosmiconfig/",\
@@ -1717,6 +1727,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:20.3.1"],\
             ["@types/react", "npm:18.2.12"],\
             ["@types/react-dom", "npm:18.2.5"],\
+            ["core-js", "npm:3.34.0"],\
             ["flowbite", "npm:1.7.0"],\
             ["next", "virtual:358b4c7cb3abdcdfa4a95e1c25294b6a8d39f7ae0e15bf953b55959e34d8d42d7e2b0d4b0ff2f43d159b91ac4864866f99e9c5815c4bb96e7a75fc6f5fb5b0bf#npm:13.4.5"],\
             ["react", "npm:18.2.0"],\

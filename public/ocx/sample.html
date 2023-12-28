@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>IRLINK WEB SAMPLE (IR-USB, OCX)</title>
+
+    <script type="text/javascript" src="./scripts/method.js"></script>
+    <script type="text/javascript" src="./scripts/event.js"></script>
+
+    <script language="javascript" for="IRUSB" event="DevConnect(nConnFlag)">
+      DevConnect(nConnFlag)
+    </script>
+  </head>
+
+  <body>
+    <!-- Page Title -->
+    <main style="width: 800px">
+      <div style="width: 790px; height: 30px">
+        <b>
+          <font size="4" face="Tahoma" color="blue">IRUSB WebSample</font>
+        </b>
+        <br />
+      </div>
+    </main>
+    <!-- End of Page Title -->
+
+    <!-- ActiveX Control -->
+    <div style="width: 790px">
+      <fieldset style="width: 785px; height: 70px">
+        <legend><font size="3" face="Tahoma">ActiveX Control</font></legend>
+        <table border="0" width="760" align="center">
+          <tr>
+            <td align="center"><font size="2" face="Tahoma">IRUSB</font></td>
+          </tr>
+          <tr>
+            <td align="center">
+              <object
+                id="IRUSB"
+                name="IRUSB"
+                width="20"
+                height="20"
+                classid="CLSID:2C7789BE-2160-41F0-B350-9595620DD0D8"
+                codebase="./cab/IRUSBControl.cab#version=1,0,0,27"
+              ></object>
+              <!-- <object
+                id="IRUSB"
+                name="IRUSB"
+                width="100"
+                height="20"
+                classid="CLSID:2C7789BE-2160-41F0-B350-9595620DD0D8"
+                codebase="./cabfiles/IRUSBControl.cab#version=1,0,0,22"
+              ></object>
+              <object
+                id="ZiPhonePlus"
+                name="ZiPhonePlus"
+                width="100"
+                height="20"
+                classid="CLSID:A48F4ED5-7E74-45F0-B09F-2B9768A81ED0"
+                codebase="./cabfiles/ZiPhonePlus.cab#version=2.0.1.28"
+              ></object>
+              <object
+                id="ZiPhonePlayer"
+                name="ZiPhonePlayer"
+                width="100"
+                height="20"
+                classid="CLSID:65409E0F-7801-4455-BEDB-9A3A2655177D"
+                codebase="./cabfiles/ZiPhonePlayer.cab#version=2.0.1.45"
+              ></object> -->
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+    </div>
+    <!-- End of ActiveX Control -->
+
+    <!-- Information -->
+    <div style="width: 790px; margin-top: 4px">
+      <fieldset style="width: 785px">
+        <legend><font size="3" face="Tahoma">Information</font></legend>
+        <table border="0" width="760px" align="center">
+          <tr>
+            <td width="750px">
+              <textarea
+                id="txtInfo"
+                name="txtInfo"
+                cols="700"
+                rows="12"
+                style="width: 750px; overflow-x: auto; overflow-y: auto"
+              ></textarea>
+              <br />
+              <input
+                type="Button"
+                id="btnInfoClear"
+                name="btnInfoClear"
+                value="InfoClear"
+                style="width: 80px; margin-top: 4px"
+                onClick="InfoClear()"
+              />
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+    </div>
+    <!-- End of Information -->
+
+    <!-- Connect -->
+    <div style="width: 790px; margin-top: 4px">
+      <fieldset style="width: 785px">
+        <legend><font size="3" face="Tahoma">Connect</font></legend>
+        <table border="0" width="760px" align="center">
+          <tr>
+            <td>
+              <font size="2" face="Tahoma">
+                <input
+                  type="Button"
+                  id="btnDevice"
+                  name="btnDevice"
+                  value="CreateDevice"
+                  style="width: 180px"
+                  onClick="fn_DeviceConnCompare()"
+                />
+              </font>
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+    </div>
+    <!-- End of Connect -->
+  </body>
+</html>
