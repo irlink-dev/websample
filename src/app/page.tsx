@@ -18,6 +18,7 @@ import MessageUnit from '@/components/unit/MessageUnit'
 import BatteryUnit from '@/components/unit/BatteryUnit'
 import DeviceUnit from '@/components/unit/DeviceUnit'
 import ExtraUnit from '@/components/unit/ExtraUnit'
+import HeadsetUnit from "@/components/unit/HeadsetUnit";
 
 declare global {
   interface Window {
@@ -111,12 +112,18 @@ const RootPage = () => {
 
           <section className="border-y-2 border-[#eeeeee]">
             <div className="w-full flex flex-col gap-2 p-5 bg-white">
+              <HeadsetUnit ocx={ocx} />
+            </div>
+          </section>
+
+          <section className="border-y-2 border-[#eeeeee]">
+            <div className="w-full flex flex-col gap-2 p-5">
               <ExtraUnit ocx={ocx} />
             </div>
           </section>
 
           <section className="">
-            <div className="w-full flex flex-col gap-2 p-5">
+            <div className="w-full flex flex-col gap-2 p-5 bg-white">
               <span className="text-sm text-[#777777]">
                 Socket.io Client v2
               </span>

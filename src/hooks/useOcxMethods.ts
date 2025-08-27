@@ -109,6 +109,14 @@ const useOcxMethods = (ocx: any) => {
     ocx.GetBatteryState()
   }
 
+  const getBatteryInfoHeadset = () => {
+    ocx.GetBatteryInfoHeadset()
+  }
+
+  const getStateHeadset = () => {
+    ocx.GetStateHeadset()
+  }
+
   const setExtra = (values: string) => {
     ocx.SetExtra(values)
   }
@@ -146,6 +154,8 @@ const useOcxMethods = (ocx: any) => {
     getMessageCount,
     getBatteryInfo,
     getBatteryState,
+    getBatteryInfoHeadset,
+    getStateHeadset,
     setExtra,
     setSelectDevice,
     setUserInput,

@@ -273,6 +273,20 @@ const useOcxEvents = (ocx: any, ocxStateContext: any) => {
   }
 
   /**
+   * 헤드셋 배터리 정보.
+   */
+  ocx.DevBatteryInfoHeadset = (level: string) => {
+    console.log(`✳️ [DevBatteryInfoHeadset] level: ${level}`)
+  }
+
+  /**
+   * 헤드셋 상태.
+   */
+  ocx.DevStateHeadset = (state: number) => {
+    console.log(`✳️ [DevStateHeadset] state: ${state}`)
+  }
+
+  /**
    * 문자 발송 건수.
    */
   ocx.DevMessageCount = (
