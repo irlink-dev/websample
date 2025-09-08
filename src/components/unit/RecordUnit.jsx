@@ -18,7 +18,7 @@ const RecordUnit = ({ ocx }) => {
       {/* 부분 녹취 종료 */}
       <button
         className={ButtonStyles.PRELINE_OUTLINE}
-        onClick={() => setRecPartial(0, 'filename')}
+        onClick={() => setRecPartial(0, 'fileName')}
       >
         <Stop /> STOP
       </button>
